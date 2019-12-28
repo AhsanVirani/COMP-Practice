@@ -1,7 +1,8 @@
 #include <stdio.h>
 
 
-void flagFunction(void)
+void
+flagFunction(void)
 {
 	char color[5] = {'w', 'g', 'b', 'y', 'r'};
 	

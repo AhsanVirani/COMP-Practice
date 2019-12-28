@@ -1,26 +1,7 @@
 #include <stdio.h>
 
-
-void flagFunction(char *colour)
-{
-	printf("im in function: flagFunction() colour address -> %x\n", colour);
-	colour[2] = 'G';
-	//char color[5] = {'w', 'g', 'b', 'y', 'r'};
-	
-	for(int i = 0; colour[i] != '\0'; i++)
-	{
-		switch(colour[i])
-		{
-			case 'g': puts("Your color is green"); printf("at %d\n", i); break;
-		
-			case 'w': puts("Your color is white"); printf("at %d\n", i); break;
-
-			default: puts("Something else"); printf("at %d\n", i); 
-		}
-	
-	}
-
-}
+void
+flagFunction(char *);
 
 int
 main(void)
@@ -41,4 +22,26 @@ main(void)
 
 }
 
+void
+flagFunction(char *colour)
+{
+	printf("im in function: flagFunction() colour address -> %x\n", colour);
+	colour[2] = 'G';
+	printf("%p\n", (colour+sizeof(char)*2));
+	//char color[5] = {'w', 'g', 'b', 'y', 'r'};
+	
+	for(int i = 0; colour[i] != '\0'; i++)
+	{
+		switch(colour[i])
+		{
+			case 'g': puts("Your color is green"); printf("at %d\n", i); break;
+		
+			case 'w': puts("Your color is white"); printf("at %d\n", i); break;
+
+			default: puts("Something else"); printf("at %d\n", i); 
+		}
+	
+	}
+
+}
 
