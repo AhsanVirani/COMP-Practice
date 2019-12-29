@@ -17,4 +17,5 @@ main(void)
 }
 
 int 
+
 square(int a)	{ return (a * a); }
