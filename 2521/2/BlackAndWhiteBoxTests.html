@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+<title>BlackAndWhiteBoxTests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="BlackAndWhiteBoxTests_files/style.css" type="text/css">
+
+<link rel="stylesheet" href="BlackAndWhiteBoxTests_files/local.css" type="text/css">
+
+
+
+
+<link rel="alternate" type="application/x-wiki" title="Edit this page" href="http://alyzon-vpn.ri./~jashank/cgi-bin/ikiwiki.cgi?do=edit&amp;page=Scribblings%2FBlackAndWhiteBoxTests">
+
+
+
+
+
+
+
+</head>
+<body>
+
+<article class="page">
+
+<section class="pageheader">
+<header class="header">
+<span>
+<span class="parentlinks">
+
+<a href="https://wiki.jashankj.space/">jashankj</a>/ 
+
+<a href="https://wiki.jashankj.space/">Scribblings</a>/ 
+
+</span>
+<span class="title">
+BlackAndWhiteBoxTests
+
+</span>
+</span>
+
+
+
+</header>
+
+
+<nav class="actions">
+<ul>
+
+<li><a href="http://alyzon-vpn.ri./~jashank/cgi-bin/ikiwiki.cgi?do=edit&amp;page=Scribblings%2FBlackAndWhiteBoxTests" rel="nofollow">Edit</a></li>
+
+
+<li><a href="https://wiki.jashankj.space/recentchanges/">RecentChanges</a></li>
+
+
+
+
+<li><a rel="nofollow" href="http://alyzon-vpn.ri./~jashank/cgi-bin/ikiwiki.cgi?do=prefs">Preferences</a></li>
+
+
+
+
+
+</ul>
+</nav>
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+<div id="pagebody">
+
+<section id="content" role="main">
+<blockquote>
+  <blockquote>
+    <p>Inspired somewhat by Matt Might’s “reply-to-all” approach to
+(academic) blogging, and assuming that what I keep here could be
+considered a blog, here’s my response to a student question from a
+<a href="https://webcms3.cse.unsw.edu.au/COMP1927/17x1/">COMP1927</a> class.</p>
+
+    <p>Thanks to Curtis&nbsp;Millar for several intelligent and thoughtful
+comments that improved this write-up immensely.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p><em>I am a bit confused at how to write white box tests, as all I can
+find on it are definitions of what white box testing is, with no
+examples.  I consulted my tutor, who said white box testing and
+black box testing were essentially the same […]</em></p>
+</blockquote>
+
+<p>Oh, good gods, no.</p>
+
+<p>There’s two halves to the testing story.</p>
+
+<p>Let’s say we have this interface.</p>
+
+<pre><code>// Bag.h
+typedef struct bag *Bag;
+Bag bag_new (void); // create a new Bag
+void bag_delete (Bag); // destroy a Bag
+void bag_insert (Bag, int item); // add an item to the Bag
+size_t bag_size (Bag); // get the Bag size
+bool bag_contains (Bag, int item); // does Bag contain `item`?
+</code></pre>
+
+<p>Black-box testing, as you know, follows the shape of the specification
+and its interface to determine whether an implementation conforms to it.</p>
+
+<p>To write and perform black-box tests, it isn’t necessary to know how a
+particular implementation ‘does things’ – the layout of structures,
+the inner workings of helper functions, etc.  It can, and should, be
+treated as a “black box”; hence the name.</p>
+
+<p>For our Bag, we may like to write tests for the <code>bag_size</code> function
+that look like this:</p>
+
+<pre><code>// in BagTest.c
+void test_bag_size (void) {
+    Bag b = bag_new();
+    assert (bag_size (b) == 0);
+
+    for (int i = 1; i &lt;= 10; i++) {
+        bag_insert (b, i);
+        assert (bag_size (b) == (size_t)i);
+    }
+
+    assert (bag_size (b) == 10);
+}
+</code></pre>
+
+<p>It’s worth noting that we’re testing here for correct behaviour.  It’s
+slightly harder to deal with testing for incorrect behaviour, unless
+you’ve defined various boundary behaviours to use for robustness
+testing – and in any case, that becomes part of the spec, and can and
+should be tested anyway.</p>
+
+<hr>
+
+<p>White-box testing, on the other hand, is highly subjective (and much
+harder to automate because of that).  It’s testing <em>with</em> awareness of
+the inner structure of structures, functions, etc., and there are many
+approaches to it.  At our level, though, here’s two you’ll want to
+use.</p>
+
+<p>The first approach, and I feel the easiest to implement, is to follow
+a similar tack to how you would write black-box tests: you set up some
+input conditions, call a function, then check the output matches your
+expectations.</p>
+
+<p>Instead of, as you would have done with black-box testing, examining
+isolated return values as outputs from the purposely small ‘surface
+area’ exposed by the interface functions, with white-box testing you
+must examine the state of your ADT.  Every piece of data you
+meaningfully store, every byte referenced by or held in your type’s
+structure becomes fair game for inspection.</p>
+
+<p>Such tests would have to, of course, sit in one or more functions, to
+keep your code clean, and by necessity it must live in your
+implementation file.</p>
+
+<p>Let’s assume our Bag is implemented as a linked-list stack.  There
+are, of course, other implementations you could use here: arrays,
+queues, trees, heaps, etc. etc. etc.</p>
+
+<pre><code>// in Bag.c
+struct bag {
+    struct bag_node *top;
+    size_t n_items;
+};
+struct bag_node {
+    int item;
+    struct bag_node *next;
+};
+
+#define for_each_bag_node(first,this) \
+    for (struct bag_node *this = first; \
+        this != NULL; this = this-&gt;next)
+
+// ... some actual implementation elided...
+</code></pre>
+
+<p>How would we go about writing tests, then?  We have to be aware of the
+shape of our implementation, of course.</p>
+
+<pre><code>// still in Bag.c
+void white_box_tests (void) {
+    wbt_bag_size ();
+    // and other tests
+}
+
+static void wbt_bag_size (void) {
+    Bag b = bag_new ();
+    assert (b-&gt;size == 0);
+    assert (b-&gt;top == NULL);
+    assert (b-&gt;size == bag_size (b));
+
+    for (int i = 1; i &lt;= 10; i++) {
+        bag_insert (b, i);
+        assert (b-&gt;size == i);
+        assert (b-&gt;top != NULL);
+
+        size_t node_count = 0;
+        for_each_bag_node (b-&gt;top, curr) {
+            node_count++;
+        }
+        assert (node_count == b-&gt;size &amp;&amp; node_count == i);
+
+        assert (b-&gt;size == bag_size (b));
+    }
+}
+</code></pre>
+
+<p>This looks a lot like the black box tests above, but instead of using
+the interface, I’m stabbing into my ADT structures, I’m walking along
+the list I hold to ensure the number of nodes in the list actually
+matches the number of nodes I think I have, etc.</p>
+
+<p>Each implementation would have its own white-box tests.  Some would be
+more complex than others, by the very nature of the implementation;
+some would be simpler.  But each implementation has a <em>distinct</em> set
+of tests, which cannot be swapped into another implementation, unlike
+black-box tests which are purposefully implementation agnostic.</p>
+
+<hr>
+
+<p>Another approach is to use the assert(3) macro/function at every point
+to confirm that your conditions, or “invariants”, hold: for example,
+that your head and tail pointers are the same iff there is only one
+node, or that each node’s previous node’s next node is itself.</p>
+
+<p>This approach takes significantly more work, is more invasive into
+your code, and you have to almost engineer it in, but you may find
+this approach can be a bit more thorough, and allow for cleaner
+design.  You’ll encounter more of this sort of idea in software
+engineering courses.</p>
+
+<p>Going back to our Bag ADT, let’s have a look at what this would look
+like for the <code>bag_size</code> function.</p>
+
+<pre><code>// back in Bag.c
+size_t bag_size (struct bag *b) {
+    // pre-conditions
+    assert ((b != NULL) &amp;&amp;
+        ((b-&gt;size == 0 &amp;&amp; b-&gt;top == NULL) ||
+         (b-&gt;size &gt; 0  &amp;&amp; b-&gt;top != NULL)));
+
+    return b-&gt;size;
+}
+</code></pre>
+
+<p>And let’s have a quick look at <code>bag_insert</code> while we’re here.</p>
+
+<pre><code>void bag_insert (struct bag *b, int value) {
+    // pre-conditions
+    assert ((b != NULL) &amp;&amp;
+        ((b-&gt;size == 0 &amp;&amp; b-&gt;top == NULL) ||
+         (b-&gt;size &gt; 0  &amp;&amp; b-&gt;top != NULL)));
+
+    struct bag_node *bn = bag_node_new (value);
+    assert (bn != NULL &amp;&amp; bn-&gt;item == value);
+    bn-&gt;next = b-&gt;top;
+    b-&gt;top = bn;
+    b-&gt;size++;
+
+    // post-conditions
+    assert (b-&gt;size &gt; 0 &amp;&amp;
+        b-&gt;top != NULL &amp;&amp;
+        b-&gt;top-&gt;item == value);
+}
+</code></pre>
+
+<p>This looks much more complex, but the core of the function is still
+the same: create a node, prepend it to the list.  We merely make
+statements about the nature of the bag before and after we do so, and
+ensure that those statements hold (or the program goes away).</p>
+
+<p>You could probably, with some thought, expand the pre-condition and
+post-conditions to ensure that (more of) the integrity of the list
+holds, though it would become messy with more than a few nodes.</p>
+
+<p>(In fact, as I was writing this example, I stuffed up and forgot to
+increment <code>b-&gt;size</code>… and then wrote the post-condition assertion and
+realised my mistake.)</p>
+
+<p>As a marker, I’d consider that this strategy shows you have a better
+understanding of the code you’ve written because, by its very nature,
+it encourages clearer code through more thorough use of abstraction to
+isolate common code, which can radically affect your design.</p>
+
+<p>For example, instead of seeing you iterate through a list until some
+counter matches some other value, you may have a function that gets
+the nth line of the list, and you would be able to test this in either
+a separate function, or merely assert your expectations.</p>
+
+<p>Both strategies can be used together, too.</p>
+
+<p>It’s probably a bit hard to graft the latter strategy into your
+assignment code at this stage, what with the deadline mere hours
+ago…  but I hope this is at least somewhat enlightening about the
+shape and nature of testing strategies.</p>
+
+</section>
+
+
+
+
+
+
+
+</div>
+
+<footer id="footer" class="pagefooter" role="contentinfo">
+
+<nav id="pageinfo">
+
+
+
+
+
+
+<nav id="backlinks">
+Links:
+
+<a href="https://wiki.jashankj.space/CSE/Hints/COMP1511Testing0/">CSE/Hints/COMP1511Testing0</a>
+
+<a href="https://wiki.jashankj.space/">index</a>
+
+
+</nav>
+
+
+
+
+
+
+<div class="pagedate">
+Last edited <time datetime="2018-04-09T12:55:53Z">Mon 09 Apr 2018 12:55:53 GMT</time>
+<!-- Created <time datetime="2018-04-09T12:55:53Z" pubdate="pubdate">Mon 09 Apr 2018 12:55:53 GMT</time> -->
+</div>
+
+</nav>
+
+
+<!-- from jashankj -->
+</footer>
+
+</article>
+
+
+
+</body></html>

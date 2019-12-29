@@ -1,0 +1,97 @@
+/* Get some Bootstrappy styles going, by pulling in Reboot. */
+/*@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap-reboot.css);*/
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css);
+
+/* Fixed-width container. */
+body
+	{ max-width: 768px
+	; margin-left: auto
+	; margin-right: auto
+	; min-height: 100vh
+	}
+
+/* Colour around the body. */
+html
+	{ background-color: black }
+body
+	{ background-color: white }
+
+/* Some whitespace to the sides. */
+section[role="main"],
+.pageheader,
+.pageheader header.header,
+.pagefooter
+	{ padding-left: 1rem
+	; padding-right: 1rem
+	}
+
+/* Push the actions over to the right. */
+.pageheader
+	{ display: flex
+	; justify-content: space-between
+	; align-items: flex-end
+	}
+
+.pageheader header.header,
+.pageheader nav.actions
+	{ display: block
+	; padding: .5rem
+	}
+
+.pageheader nav.actions ul
+	{ margin-bottom: .5rem }
+
+/* Parentlinks above, with some colour and space */
+.parentlinks
+	{ display: block
+	; font-size: 80%
+	; color: #666666
+	}
+.parentlinks a
+	{ padding-right: 0.5rem }
+
+/* Promote borders from the elemnts they're applied to. */
+.pageheader nav.actions ul,
+.pagefooter #pageinfo
+	{ border: 0 !important }
+.pageheader
+	{ border-bottom: 1px solid #333 }
+.pagefooter
+	{ border-top: 1px solid #333 }
+
+/* Put backgrounds behind the page header and footer. */
+.pageheader,
+.pagefooter
+	{ min-height: 2rem
+	; background-color: #eee
+	}
+
+/* Muted footer text. */
+.pagefooter
+	{ margin-top: .5rem
+	; padding-bottom: .5rem
+	; color: #666
+	; font-size: 80%
+	}
+
+/* Blockquotes */
+blockquote
+	{ margin: .5rem auto
+	; padding-left: 1rem
+	; padding-right: 1rem
+	; border-left: 4px solid #ccc
+	}
+
+/* Preformatted */
+pre, tt, p>code
+	{ background-color: #eeeeee
+	; border: 1px dotted #cccccc
+	}
+pre, tt, code
+	{ color: #111111; }
+
+pre
+	{ padding: .5rem }
+tt,
+p>code
+	{ padding: .25rem }

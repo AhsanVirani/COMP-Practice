@@ -1,0 +1,508 @@
+<!--?xml version="1.0" encoding="utf-8" ?-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Tutorial Solutions — COMP2521 19T0: Data Structures and Algorithms</title>
+
+  <link rel="stylesheet" href="Tutorial%20Solutions%20%E2%80%94%20COMP2521%2019T0%20%20Data%20Structures%20and%20Algorithms_files/main.css">
+  <link rel="canonical" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week02/20_tutorial_solutions/">
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body class="d-flex flex-column" style="min-height: 100vh;"><div id="MathJax_Message" style="display: none;"></div>
+
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary no-print" id="header-navbar">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navmenu" aria-controls="navmenu" aria-label="Toggle navigation" aria-expanded="false">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="container">
+    <a class="navbar-brand" href="https://www.cse.unsw.edu.au/~cs2521/19T0/">
+      COMP2521 19T0
+    </a>
+
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/webcms/">WebCMS3</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/outline/">Outline</a></li>
+        <li class="navbar-text px-4">|</li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/assignments/textbuffer/">A1</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/assignments/dracula/">A2</a></li>
+        <li class="navbar-text px-4">|</li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week01/">1</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week02/">2</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week03/">3</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week04/">4</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week05/">5</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week06/">6</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week07/">7</a></li>
+        <li class="nav-item"><a class="nav-link" href="https://www.cse.unsw.edu.au/~cs2521/19T0/week08/">8</a></li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" id="breadcrumb">
+  
+  <ol class="breadcrumb no-print" style="margin: 0">
+    
+    
+      
+      
+      
+      <li class="breadcrumb-item">
+        <a href="https://www.cse.unsw.edu.au/~cs2521/19T0/">Home</a>
+      </li>
+      
+    
+      
+      
+      
+      <li class="breadcrumb-item">
+        <a href="https://www.cse.unsw.edu.au/~cs2521/19T0/week02/">Week 2</a>
+      </li>
+      
+    
+      
+      
+      
+      <li class="breadcrumb-item">
+        <a href="https://www.cse.unsw.edu.au/~cs2521/19T0/week02/20_tutorial_solutions/">Tutorial Solutions</a>
+      </li>
+      
+    
+  </ol>
+  
+</div>
+
+
+  <main class="container" aria-label="Content" style="flex: 1;">
+    <main style="max-width: 88ex; margin: 0 auto;">
+
+<header class="text-center">
+  <h1 class="display-4">Tutorial Solutions</h1>
+</header>
+
+
+
+
+
+<h2 id="assignment-1">Assignment 1</h2>
+
+<p>Ask your tutor
+any questions you have
+about assignment 1!</p>
+
+<p>Your implementation must keep
+the lines of a textbuffer
+in a linked data structure
+such as a linked list,
+or variant of that.
+Each line must be represented as
+a dynamically allocated character array.
+Discuss what this means.</p>
+
+<p>Consider the following code,
+derived from a submission test –</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">Textbuffer</span> <span class="n">tb</span> <span class="o">=</span> <span class="n">textbuffer_new</span> <span class="p">(</span>
+		<span class="s">"1.1 abc</span><span class="se">\n</span><span class="s">"</span>
+		<span class="s">"1.2 def</span><span class="se">\n</span><span class="s">"</span>
+	<span class="p">);</span>
+	<span class="kt">char</span> <span class="o">*</span><span class="n">str</span> <span class="o">=</span> <span class="n">textbuffer_to_str</span> <span class="p">(</span><span class="n">tb1</span><span class="p">);</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Original Tb:</span><span class="se">\n</span><span class="s">%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">str</span><span class="p">);</span>
+	<span class="n">free</span> <span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Can we modify the string passed into
+the <code class="highlighter-rouge">textbuffer_new</code> function?</p>
+
+<aside class="answer">
+  <blockquote>
+    <p>No! String literals,
+like <code class="highlighter-rouge">"1.1 abc\n1.2 def\n"</code>, are <em>immutable</em>:
+they cannot be modified or mutated.
+If you wanted to modify it,
+you would need to create a copy of it first,
+then modify the copy.</p>
+  </blockquote>
+</aside>
+
+<p>Think of some testing ideas
+with your class and your tutor.</p>
+
+<h2 id="using-stacks-and-queues">Using Stacks and Queues</h2>
+
+<p>Consider the following interfaces
+given in lectures,
+for a stack and a queue:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ... queue.h</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">queue</span> <span class="o">*</span><span class="n">Queue</span><span class="p">;</span>
+<span class="n">Queue</span> <span class="n">queue_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">queue_drop</span> <span class="p">(</span><span class="n">Queue</span><span class="p">);</span>
+<span class="n">Item</span> <span class="n">queue_de</span> <span class="p">(</span><span class="n">Queue</span> <span class="n">q</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">queue_en</span> <span class="p">(</span><span class="n">Queue</span><span class="p">,</span> <span class="n">Item</span><span class="p">);</span>
+<span class="kt">size_t</span> <span class="n">queue_size</span> <span class="p">(</span><span class="n">Queue</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ... stack.h</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">stack</span> <span class="o">*</span><span class="n">Stack</span><span class="p">;</span>
+<span class="n">Stack</span> <span class="n">stack_new</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">stack_drop</span> <span class="p">(</span><span class="n">Stack</span><span class="p">);</span>
+<span class="n">Item</span> <span class="n">stack_pop</span> <span class="p">(</span><span class="n">Stack</span> <span class="n">s</span><span class="p">);</span>
+<span class="kt">void</span> <span class="n">stack_push</span> <span class="p">(</span><span class="n">Stack</span><span class="p">,</span> <span class="n">Item</span><span class="p">);</span>
+<span class="kt">size_t</span> <span class="n">stack_size</span> <span class="p">(</span><span class="n">Stack</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Using two stack data structures,
+show how you can implement
+a queue data structure.</p>
+
+<aside class="answer">
+  <blockquote>
+    <p>Let’s say we’ve got two stacks,
+<code class="highlighter-rouge">stack1</code> and <code class="highlighter-rouge">stack2</code>.</p>
+
+    <p>To add items to the queue,
+simply add the items to one of the stacks
+using <code class="highlighter-rouge">stack_push</code>.</p>
+
+    <p>To remove the first item from the queue,
+we pop items from <code class="highlighter-rouge">stack1</code>
+and push them onto <code class="highlighter-rouge">stack2</code>
+until <code class="highlighter-rouge">stack1</code> is empty.</p>
+
+    <p>Popping the top item off <code class="highlighter-rouge">stack2</code>
+will give you the first item of the queue.</p>
+
+    <p>Checking whether the queue is empty
+is the same as for the stack.</p>
+  </blockquote>
+</aside>
+
+<p>Using two queue data structures,
+show how you can implement
+a stack data structure.</p>
+
+<aside class="answer">
+  <blockquote>
+    <p>Let’s say we’ve got two queues,
+<code class="highlighter-rouge">queue1</code> and <code class="highlighter-rouge">queue2</code>.
+To add items to the stack,
+we add items to one of the queues ,
+using <code class="highlighter-rouge">queue_en</code>.</p>
+
+    <p>To pop the top item off the stack,
+we remove items one at a time with <code class="highlighter-rouge">queue_de</code>
+until the queue is empty.
+Every item but the last
+can be put on the second queue;
+the last item is the top of the stack.
+We repeat the same process
+by dequeuing the next item from <code class="highlighter-rouge">queue1</code>.</p>
+  </blockquote>
+</aside>
+
+<p>Using only the functions
+for manipulating stacks
+in the stack interface,
+write a function
+that joins two stacks <code class="highlighter-rouge">stack1</code> and <code class="highlighter-rouge">stack2</code>,
+such that <code class="highlighter-rouge">stack1</code> is “stacked” on <code class="highlighter-rouge">stack2</code>.
+(Note that the contents of <code class="highlighter-rouge">stack1</code>
+do not need to be preserved.)</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">stack_stacks</span> <span class="p">(</span><span class="n">Stack</span> <span class="n">stack1</span><span class="p">,</span> <span class="n">Stack</span> <span class="n">stack2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<aside class="answer">
+  <blockquote>
+    <div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">stack_stacks</span> <span class="p">(</span><span class="n">Stack</span> <span class="n">stack1</span><span class="p">,</span> <span class="n">Stack</span> <span class="n">stack2</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">// Create a new temporary stack.</span>
+	<span class="n">Stack</span> <span class="n">stack3</span> <span class="o">=</span> <span class="n">stack_new</span> <span class="p">();</span>
+
+	<span class="c1">// Roll all the items off `stack1` onto our new temporary stack.</span>
+	<span class="c1">// This reverses the order of everything on `stack1`...</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">stack_size</span> <span class="p">(</span><span class="n">stack1</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">stack_push</span> <span class="p">(</span><span class="n">stack3</span><span class="p">,</span> <span class="n">stack_pop</span> <span class="p">(</span><span class="n">stack1</span><span class="p">));</span>
+	<span class="p">}</span>
+
+	<span class="c1">// ... so we can stack it back onto `stack2` in the right order.</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">stack_size</span> <span class="p">(</span><span class="n">stack3</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">stack_push</span> <span class="p">(</span><span class="n">stack2</span><span class="p">,</span> <span class="n">stack_pop</span> <span class="p">(</span><span class="n">stack3</span><span class="p">));</span>
+	<span class="p">}</span>
+
+	<span class="c1">// And get rid of our temporary stack.</span>
+	<span class="n">stack_drop</span> <span class="p">(</span><span class="n">stack3</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+  </blockquote>
+</aside>
+
+<h2 id="implementing-a-stack-with-a-linked-list">Implementing a Stack with a Linked List</h2>
+
+<p>As we did in the lectures,
+implement from the Stack interface
+given in Exercise 1,
+using a linked list structure.
+How will you represent your stack?</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">typedef</span> <span class="k">struct</span> <span class="n">stack</span> <span class="n">stack</span><span class="p">;</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">stack_node</span> <span class="n">stack_node</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">stack</span> <span class="p">{</span>
+	<span class="c1">// You need to decide what goes in here</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">stack_node</span> <span class="p">{</span>
+	<span class="c1">// You need to decide what goes in here</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Assume you have the following
+local helper function to create nodes –</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">static</span> <span class="n">stack_node</span> <span class="o">*</span><span class="n">stack_node_new</span> <span class="p">(</span><span class="n">Item</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="emordnilap">Emordnilap!</h2>
+
+<p>An emordnilap is a string of characters
+which have the property that
+they can be read the same from either end,
+ignoring whitespace, punctuation, and case.
+It will always have
+an even number of characters that match:
+“tacocat” and “Madam, I’m Adam” are not emordnilaps,
+but “Hannah” and “rats live on no evil star” are.</p>
+
+<p>Write a program which,
+given a string,
+will print “yes” if it is an emordnilap,
+and “no” otherwise.</p>
+
+<pre><kbd is="shell">./emordnilap Hannah</kbd>
+yes
+<kbd is="shell">./emordnilap "rats live on no evil star"</kbd>
+yes
+<kbd is="shell">./emordnilap "tacocat"</kbd>
+no
+<kbd is="shell">./emordnilap "Madam, I'm Adam"</kbd>
+no
+<kbd is="shell">./emordnilap "Citation Needed"</kbd>
+no
+</pre>
+
+<p><strong class="text-info">HINT</strong>
+This is very similar to
+the balanced brackets problem
+from the lecture.</p>
+
+<p><strong class="text-danger">CHALLENGE</strong>
+Modify your solution to match palindromes.</p>
+
+<h2 id="on-testing">On Testing</h2>
+
+<p>What is the difference between black box and white box testing?</p>
+
+<aside class="answer">
+  <blockquote>
+    <p>Black-box testing tests the functionality of the code.
+It focuses on the input and output of the functions
+defined in the interface.
+It does not rely on the underlying implementation,
+so our black box tests should still work
+even if we change the implementation.</p>
+
+    <p>White-box testing tests the structure of the code.
+It relies on knowing, accessing and testing
+the internal state of an implementation.
+If we changed our implementation,
+we would need to write new white-box tests.</p>
+  </blockquote>
+</aside>
+
+<h2 id="on-black-box-testing">On Black-Box Testing</h2>
+
+<p>Let’s say we have a set of tests in a file <code class="highlighter-rouge">test_stack.c</code>,
+which includes the <code class="highlighter-rouge">stack.h</code> interface from Exercise 1 –</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include &lt;assert.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+</span>
+<span class="cp">#include "stack.h"
+</span>
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Testing new stack</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="n">Stack</span> <span class="n">s</span> <span class="o">=</span> <span class="n">stack_new</span><span class="p">();</span>
+	<span class="n">assert</span> <span class="p">(</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">printf</span> <span class="p">(</span><span class="s">"Test passed</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>When compiling my test file,
+I get the following compile error:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test_stack.c:11:5: error: dereferencing pointer to incomplete type
+</code></pre></div></div>
+
+<p>What does this mean?</p>
+
+<aside class="answer">
+  <blockquote>
+    <p>C allows us to <em>forward-declare</em> functions and types –
+that is, we can declare that a function or type will follow,
+without giving its implementation.
+When we forward-declare a type,
+we get an <em>incomplete type</em>,
+which we can still use by reference,
+We can only get values out of it
+after the concrete definition of the type is provided.</p>
+
+    <p>However, all that we have in <code class="highlighter-rouge">stack.h</code> is the incomplete type.
+An ADT effectively has no concrete type definition;
+that’s strictly constrained to the implementation.
+Thus, attempting to do <code class="highlighter-rouge">s-&gt;size</code> will fail:
+we have no access to the underlying implementation,
+except via the interface’s functions and types.</p>
+  </blockquote>
+</aside>
+
+
+
+</main>
+
+  </main>
+
+  <footer class="mt-3 py-3 text-center no-print bg-dark">
+  <p class="text-muted">
+    <strong>COMP2521 19T0: Data Structures and Algorithms</strong>
+    is brought to you by <br>
+    the <a href="https://www.cse.unsw.edu.au/">School of Computer Science and Engineering</a>
+    at the <a href="https://www.unsw.edu.au/">University of New South Wales</a>, Sydney.<br>
+    For all enquiries, please email the class account at
+    <a href="mailto:cs2521@cse.unsw.edu.au">cs2521@cse.unsw.edu.au</a><br>
+
+    <small>CRICOS Provider 00098G</small>
+  </p>
+</footer>
+
+  <script type="text/javascript" async="1" src="Tutorial%20Solutions%20%E2%80%94%20COMP2521%2019T0%20%20Data%20Structures%20and%20Algorithms_files/jquery-3.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script type="text/javascript" async="1" src="Tutorial%20Solutions%20%E2%80%94%20COMP2521%2019T0%20%20Data%20Structures%20and%20Algorithms_files/tether.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script type="text/javascript" async="1" src="Tutorial%20Solutions%20%E2%80%94%20COMP2521%2019T0%20%20Data%20Structures%20and%20Algorithms_files/bootstrap.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script type="text/javascript" async="1" src="Tutorial%20Solutions%20%E2%80%94%20COMP2521%2019T0%20%20Data%20Structures%20and%20Algorithms_files/MathJax.js" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  // Hide navigiation in iframe
+  if (window.self !== window.top)
+    document.body.classList.add("iframe");
+</script>
+
+
+
+</body></html>
