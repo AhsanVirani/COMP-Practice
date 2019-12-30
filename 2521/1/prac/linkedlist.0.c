@@ -1,89 +1,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-typedef int Item;
-
-typedef struct _node *node;
-typedef struct _node {
-	Item	data;
-	node	next;
-} _node;
-
-node
-makeNode(void)
-{
-	node n = (node)malloc(sizeof(*n));
-	(*n).data = 0;
-	(*n).next = NULL;
-
-	return n;
-}
-
-void
-setNodeItem(node n, Item data)
-{
-	(*n).data = data;	
-}
-void
-setNodeNext(node n, node m)
-{
-	(*n).next = m;	
-}
-
-node
-makeNode_1(void)
-{
-	node n = (node)malloc(sizeof(*n));
-	setNodeItem(n, 0);
-	setNodeNext(n, NULL);
-
-	return n;
-}
-
-node
-makeSetDataNode(Item data)
-{
-	node n = (node)malloc(sizeof(*n));
-	setNodeItem(n, data);
-	setNodeNext(n, NULL);
-}
-
-node
-makeSetNextNode(node m)
-{
-	node n = (node)malloc(sizeof(*n));
-	setNodeItem(n, 0);
-	setNodeNext(n, m);
-}
-
-node
-makeSetDataNextNode(Item data, node m)
-{
-	node n = (node)malloc(sizeof(*n));
-	setNodeItem(n, data);
-	setNodeNext(n, m);
-}
-
-
+struct grade {
+	int	mark;
+	char	performance;
+};
 
 int 
 main(void)
 {
-	node head = malloc(sizeof(*head));
-	(*head).data = 5;
-	(*head).next = NULL;
 
-	head = makeSetDataNextNode(4, head);
 
-	printf("%d\n", (*head).data);
-	printf("%d\n", (*(*head).next).data);
+	struct grade *s1 = (struct grade *)malloc(sizeof(struct grade));	//using malloc because the data type is not clear to C. int or char? 
+	
+	if(s1 == NULL)
+	{
+		fprintf(stderr, "Memory Full\n");
+		exit(EXIT_FAILURE);
+	}
 
-	free((*head).next);
-	(*head).next = NULL;
-	free(head);
-	head = NULL;
+	(*s1).mark = 75; (*s1).performance = 'D';
+	printf("Mark for s1 = %d and performace = %c\n", (*s1).mark, (*s1).performance);
+	
+	free(s1); s1 = NULL;
 
-	return EXIT_SUCCESS;
+	int a = 5;
+	printf("%d\n", a);
+	
+	int *b = (int *)calloc(1, sizeof(int));
+	if(b == NULL)
+	{
+		fprintf(stderr, "Out of Memory\n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("auto initilised to %d\n", (*b));
+	
+	(*b) = 10;
+	printf("Value set to %d\n", (*b));	
+
+	free(b); b = NULL;
+
+	return 0;
 
 }
+
+
+
+
+
+/*
+
+|heap 	|
+|c	|
+|----	|
+|	|
+|-----	|
+|	|
+|______ |
+|fnc1->b|
+|_______|
+|main->a|
+|_______|
+
+Stack for a.out program
+
+
+
+
+
+
+*/
