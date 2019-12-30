@@ -14,7 +14,7 @@ traversal_1_1(int *traverse, void (*operation)(int *))
 }
 
 void
-traversal_1_2(int *traverse, void (*operation)(int *, int)
+traversal_1_2(int *traverse, void (*operation)(int *, int))
 {	
 	for(int i = 0; i < ARR_LEN; i++) { operation(traverse + i, i); }
 
@@ -56,7 +56,8 @@ showModNAdv(int *box, int n) { if (*box % n == 0) showPointerValue(box); }
 int
 main(void)
 {
-	int *arr = malloc(sizeof(int)*ARR_LEN);
+	// int *arr = malloc(sizeof(int)*ARR_LEN);
+	int *arr = calloc(0, sizeof(int)*ARR_LEN); //advance version of malloc which creates space and initialises 
 	traversal_1_1(arr, &showValue);
 	traversal_1_1(arr, &showPointerValue);
 /*	same as _|^
