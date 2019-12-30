@@ -14,61 +14,43 @@ traversal_1_1(int *traverse, void (*operation)(int *))
 }
 
 void
-traversal_1_2(int *traverse, void (*operation)(int *, int))
-{	// void (*operation)(int *) = showValue
-	for(int i = 0; i < ARR_LEN; i++)
-	{
-		//showValue(traverse + i) <!> traverse + i == &(traverse[i])
-		operation(traverse + i, i);
-	}
+traversal_1_2(int *traverse, void (*operation)(int *, int)
+{	
+	for(int i = 0; i < ARR_LEN; i++) { operation(traverse + i, i); }
+
 }
 
 void
 traversal_2_2(int *traverse, void (*operation)(int *, int), int n)
-{	// void (*operation)(int *) = showValue
-	for(int i = 0; i < ARR_LEN; i++)
-	{
-		//showValue(traverse + i) <!> traverse + i == &(traverse[i])
-		operation(traverse + i, n);
-	}
+{
+	for(int i = 0; i < ARR_LEN; i++) { operation(traverse + i, n); }
+	
 }
 
 void
-showPointerValue(int *box)
+traversal_3_3(int *traverse, void (*operation)(int *, int), int (*tool)(void))
 {
-	printf("%p has %d\n", box, (*box));
+	for(int i = 0; i < ARR_LEN; i++) { operation(traverse + i, tool()); }
+	
 }
 
 void
-showValue(int *box)
-{
-	printf("%d\n", (*box));
-}
+showPointerValue(int *box) { printf("%p has %d\n", box, (*box)); }
 
 void
-setValue(int *box, int value)
-{
-	*box = value;
-}
+showValue(int *box) { printf("%d\n", (*box)); }
 
 void
-showMod2(int *box)
-{
-	if (*box % 2 == 0) printf("%p has %d\n", box, (*box));
-}
+setValue(int *box, int value) { *box = value; }
 
 void
-showMod2Adv(int *box)
-{
-	if (*box % 2 == 0) showPointerValue(box);
-}
+showMod2(int *box) { if (*box % 2 == 0) printf("%p has %d\n", box, (*box)); }
 
 void
-showModNAdv(int *box, int n)
-{
-	if (*box % n == 0) showPointerValue(box);
-}
+showMod2Adv(int *box) { if (*box % 2 == 0) showPointerValue(box); }
 
+void
+showModNAdv(int *box, int n) { if (*box % n == 0) showPointerValue(box); }
 
 
 int
@@ -91,6 +73,11 @@ main(void)
 
 	traversal_1_1(arr, &showMod2Adv);
 	traversal_2_2(arr, &showModNAdv, 4);
+
+
+	traversal_3_3(arr, &setValue, &rand);
+	traversal_1_1(arr, &showValue);
+	traversal_2_2(arr, &showModNAdv, 2);
 
 	
 	
