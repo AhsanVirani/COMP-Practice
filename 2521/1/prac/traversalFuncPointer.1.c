@@ -57,7 +57,7 @@ int
 main(void)
 {
 	// int *arr = malloc(sizeof(int)*ARR_LEN);
-	int *arr = (int *)calloc(0, sizeof(int)*ARR_LEN); //advance version of malloc which creates space and initialises
+	int *arr = (int *)calloc(ARR_LEN, sizeof(int)); //advance version of malloc which creates space and initialises
 	if(arr == NULL) 
 	{ 
 		fprintf(stderr, "Failed to allocate memory");
