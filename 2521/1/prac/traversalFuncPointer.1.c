@@ -57,7 +57,14 @@ int
 main(void)
 {
 	// int *arr = malloc(sizeof(int)*ARR_LEN);
-	int *arr = calloc(0, sizeof(int)*ARR_LEN); //advance version of malloc which creates space and initialises 
+	int *arr = (int *)calloc(0, sizeof(int)*ARR_LEN); //advance version of malloc which creates space and initialises
+	if(arr == NULL) 
+	{ 
+		fprintf(stderr, "Failed to allocate memory");
+		exit(EXIT_FAILURE);		
+	
+	}
+
 	traversal_1_1(arr, &showValue);
 	traversal_1_1(arr, &showPointerValue);
 /*	same as _|^
@@ -98,7 +105,7 @@ main(void)
 		printf("arr[i]-> %d\n", *(arr + i));
 	}
 */
-	free(arr);	
+	free(arr); arr = NULL;	
 	//printf("arr at %p has %d * %d for int at %p\n", &arr, sizeof(int), ARR_LEN, arr);
 	//populateArray(arr, 20);
 	return 0;

@@ -1,0 +1,332 @@
+gcc traversalFuncPointer.1.c
+[ason@ason-pc prac]$ clear
+
+[ason@ason-pc prac]$ valgrind --track-origins=yes -s ./a.out
+==2288== Memcheck, a memory error detector
+==2288== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2288== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==2288== Command: ./a.out
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092E3: showValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109400: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0
+0
+0
+0
+0
+0
+64
+0
+1088
+0
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109413: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49040 has 0
+0x4a49044 has 0
+0x4a49048 has 0
+0x4a4904c has 0
+0x4a49050 has 0
+0x4a49054 has 0
+0x4a49058 has 64
+0x4a4905c has 0
+0x4a49060 has 1088
+0x4a49064 has 0
+==2288== Invalid write of size 4
+==2288==    at 0x10930D: setValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091F8: traversal_1_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109426: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109439: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49040 has 0
+0x4a49044 has 1
+0x4a49048 has 2
+0x4a4904c has 3
+0x4a49050 has 4
+0x4a49054 has 5
+0x4a49058 has 6
+0x4a4905c has 7
+0x4a49060 has 8
+0x4a49064 has 9
+==2288== Invalid read of size 4
+==2288==    at 0x109322: showMod2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10944C: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x10932F: showMod2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10944C: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49040 has 0
+0x4a49048 has 2
+0x4a49050 has 4
+0x4a49058 has 6
+0x4a49060 has 8
+==2288== Invalid read of size 4
+==2288==    at 0x10935C: showMod2Adv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10945F: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109370: showMod2Adv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10945F: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49040 has 0
+0x4a49048 has 2
+0x4a49050 has 4
+0x4a49058 has 6
+0x4a49060 has 8
+==2288== Invalid read of size 4
+==2288==    at 0x109387: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109477: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10939E: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109477: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49040 has 0
+0x4a49050 has 4
+0x4a49060 has 8
+==2288== Invalid write of size 4
+==2288==    at 0x10930D: setValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109297: traversal_3_3 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109491: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092E3: showValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094A4: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+1804289383
+846930886
+1681692777
+1714636915
+1957747793
+424238335
+719885386
+1649760492
+596516649
+1189641421
+==2288== Invalid read of size 4
+==2288==    at 0x109387: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094BC: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10939E: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094BC: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49044 is 4 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+0x4a49044 has 846930886
+0x4a49058 has 719885386
+0x4a4905c has 1649760492
+==2288== 
+==2288== HEAP SUMMARY:
+==2288==     in use at exit: 0 bytes in 0 blocks
+==2288==   total heap usage: 2 allocs, 2 frees, 1,024 bytes allocated
+==2288== 
+==2288== All heap blocks were freed -- no leaks are possible
+==2288== 
+==2288== ERROR SUMMARY: 116 errors from 14 contexts (suppressed: 0 from 0)
+==2288== 
+==2288== 3 errors in context 1 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10939E: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094BC: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49044 is 4 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 3 errors in context 2 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10939E: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109477: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 5 errors in context 3 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109370: showMod2Adv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10945F: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 5 errors in context 4 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x10932F: showMod2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10944C: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 5 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x109387: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094BC: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 6 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092E3: showValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1094A4: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 7 of 14:
+==2288== Invalid write of size 4
+==2288==    at 0x10930D: setValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109297: traversal_3_3 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109491: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 8 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x109387: showModNAdv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109245: traversal_2_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109477: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 9 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x10935C: showMod2Adv (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10945F: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 10 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x109322: showMod2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x10944C: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 11 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109439: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 12 of 14:
+==2288== Invalid write of size 4
+==2288==    at 0x10930D: setValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091F8: traversal_1_2 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109426: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 13 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092B6: showPointerValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109413: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== 
+==2288== 10 errors in context 14 of 14:
+==2288== Invalid read of size 4
+==2288==    at 0x1092E3: showValue (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x1091AE: traversal_1_1 (in /home/ason/proj/2521/1/prac/a.out)
+==2288==    by 0x109400: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288==  Address 0x4a49040 is 0 bytes after a block of size 0 alloc'd
+==2288==    at 0x483AB65: calloc (vg_replace_malloc.c:762)
+==2288==    by 0x1093B8: main (in /home/ason/proj/2521/1/prac/a.out)
+==2288== 
+==2288== ERROR SUMMARY: 116 errors from 14 contexts (suppressed: 0 from 0)
