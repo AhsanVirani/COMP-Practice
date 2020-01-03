@@ -135,8 +135,25 @@ list_free_recursive(node n)
 		return;
 	} else {
 		list_free_recursive((*n).next);
+		free(n);
+		return;
 	}
+}
 
+void
+list_show_reverse_recursive(node n)
+{
+	if(n->next == NULL)
+	{
+		//free(n);
+		printf("%s\n", n->data); 
+		return;
+	} else {
+		list_show_reverse_recursive((*n).next);
+		//free(n);
+		printf("%s\n", n->data);
+		return;
+	}
 }
 
 
@@ -174,6 +191,8 @@ main(void)
 	node h = traverse_arr_create_list(5, arr, &create_item);
 	traverse_list(h, &puts);
 
+	list_show_reverse_recursive(h);
+
 	for(int i = 0; i < 5; i++)
 	{
 		free(arr[i]);	
@@ -184,6 +203,7 @@ main(void)
 	
 	traverse_list_free(h);
 	list_free_recursive(h);
+
 
 	return 0;
 
