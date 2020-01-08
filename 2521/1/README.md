@@ -18,3 +18,5 @@ https://www.cs.swarthmore.edu/~newhall/unixhelp/C_arrays.html
 
 https://www.gnu.org/software/libc/manual/html_node/Important-Data-Types.html
 
+https://www.fsf.org/resources/
+
