@@ -50,8 +50,6 @@ linkedListDestroy(node n);
 bool
 is_next_null(node n);
 
-static
-int 
-whitebox_test(void);
+
 
 #endif // !defined(PRAC__STACK_H)

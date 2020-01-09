@@ -83,6 +83,8 @@ makeSetDataNode(Item data)
 	node n = (node)malloc(sizeof(*n));
 	setNodeItem(n, data);
 	setNodeNext(n, NULL);
+	
+	return n;
 }
 
 node
@@ -91,6 +93,8 @@ makeSetNextNode(node m)
 	node n = (node)malloc(sizeof(*n));
 	setNodeItem(n, 0);
 	setNodeNext(n, m);
+
+	return n;
 }
 
 node
@@ -99,6 +103,8 @@ makeSetDataNextNode(Item data, node m)
 	node n = (node)malloc(sizeof(*n));
 	setNodeItem(n, data);
 	setNodeNext(n, m);
+
+	return n;
 }
 
 static
@@ -123,6 +129,7 @@ linkedListDestroy(node n)
 	list_free_recursive(n);
 }
 
+/**
 static
 int 
 whitebox_test(void)
@@ -145,7 +152,7 @@ whitebox_test(void)
 
 	return EXIT_SUCCESS;
 
-}
+} **/
 
 /**
 int main(void)
