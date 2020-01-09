@@ -8,6 +8,18 @@ typedef struct stack{
 	node	n;
 } stack;
 
+size_t
+stack_size(Stack s)
+{
+	size_t count = 0;
+	//if (s->n == NULL) return 0;
+	for(node c = s->n; c != NULL; c = get_next(c))
+	{
+		count++;
+
+	}
+	return count;
+}
 
 /** Create a new, empty stack. */
 Stack stack_new (void)
@@ -68,7 +80,7 @@ stack_push (Stack s, Item data)
 		
 }
 
-
+/**
 int 
 main(void)
 {
@@ -89,4 +101,6 @@ main(void)
 	
 	
 }
+
+**/
 
