@@ -6,7 +6,7 @@ BINS=stack_test_black
 all: $(BINS)
 
 stack_test_black:	stack_test_black.o stack_linked_list.o linked_list.o
-	${CC} $(CFLAGS) -o stack_test_black stack_test_black.o stack_linked_list.o linked_list.o $(LDFLAGS)
+	$(CC) $(CFLAGS) -o stack_test_black stack_test_black.o stack_linked_list.o linked_list.o $(LDFLAGS)
 
 
 linked_list.o:	linked_list.h linked_list.c item.h
