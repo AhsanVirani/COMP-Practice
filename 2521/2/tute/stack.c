@@ -3,10 +3,14 @@
 
 #include "stack.h"
 
+typedef struct list *node;
+typedef struct list{
+	Item	data;
+	List	next;
+} list;
 
 typedef struct stack{
-	Item	data;
-	Stack	next;
+	List n;
 } stack;
 
 size_t
@@ -14,7 +18,7 @@ stack_size(Stack s)
 {
 	size_t count = 0;
 	//if (s->n == NULL) return 0;
-	for(Stack c = s; c != NULL; c = c->next)
+	for(node c = s->n; c != NULL; c = c->next)
 	{
 		count++;
 
@@ -30,65 +34,57 @@ Stack stack_new (void)
 	{
 		fprintf(stderr, "No Memory");
 	}
-	(*s).data = 0, (*s).next = NULL;
+	(*s).n = NULL;
 	return s;
 }
 
 void 
 stack_drop (Stack s)
 {
-	if(s == NULL)	return;
-	else if(s->next == NULL)
-	{
-		free(s); return;
-
-	}
-	else{
-		stack_drop(s->next);
-		free(s); return;
-	}
+	linkedListDestroy((*s).n);
 }
 
 Item 
 stack_pop (Stack s)
 {
-	assert(s != NULL);
-	//Stack head = s;
-	if ( s->next == NULL)
+	assert(s->n != NULL);
+	node head = (*s).n;
+	if ( is_next_null(head) == true)
 	{
-		Item rtn = s->data;
-		free(s); s->next = NULL;
+		Item rtn = get_data(head);
+		free(head); s->n = NULL;
 		return rtn;
 	}
-	Stack curr = s, prev = s;
-	while(curr->next != NULL)
+	node curr = s->n, prev = s->n;
+	while(get_next(curr) != NULL)
 	{
 		prev = curr;
-		curr = curr->next;
+		curr = get_next(curr);
 	}
-	Item rtn = curr->data;
-	free(curr); curr = NULL; prev->next = NULL;
+	Item rtn = get_data(curr);
+	free(curr); curr = NULL; set_next(prev, NULL);
 	return rtn;
 }
 
 void 
 stack_push (Stack s, Item data)
 {
-	Stack a = stack_new();
-	a->data = data;
+	node a = makeNode();
+	set_data(a, data);
 	//stack is empty, create a new node and save the address in stack n
-	if(s == NULL)	s = a;
+	if(s->n == NULL)	s->n = a;
 	// 5, list of 5. node -> 5, 
 	else{
-		Stack curr = s;
-		while(curr->next != NULL)
+		node curr = s->n;
+		while(get_next(curr) != NULL)
 		{
-			curr = curr->next;
+			curr = get_next(curr);
 		}
-		curr->next = a;
+		set_next(curr, a);
 	}
 		
 }
+
 
 Stack 
 stack_stacks (Stack s1, Stack s2)
@@ -119,7 +115,7 @@ main(void)
 {
 
 	Stack a = stack_new();
-	a->data = 1; 
+	stack_push(a, 1); 
 	Stack b = stack_new();
 	b->data = 2;
 	Stack c = stack_new();

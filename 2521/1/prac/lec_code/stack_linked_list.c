@@ -36,7 +36,8 @@ Stack stack_new (void)
 void 
 stack_drop (Stack s)
 {
-	linkedListDestroy((*s).n);
+	if (s->n !=NULL) linkedListDestroy((*s).n);
+	free(s);
 }
 
 Item 
@@ -78,6 +79,33 @@ stack_push (Stack s, Item data)
 		set_next(curr, a);
 	}
 		
+}
+
+Stack 
+stack_stacks (Stack s1, Stack s2)
+{
+	// Create a new temporary stack.
+	Stack s3 = stack_new();
+
+	// Put the items of s1 into the new temporary s3. Reverse order add
+	while(stack_size(s1) != 0)
+	{
+		Item t = stack_pop(s1);
+		//printf("%d\n", t);
+		stack_push(s3, t);	
+	}
+
+	// Put it at end of s2 in right order
+	while(stack_size(s3) != 0)
+	{
+		Item t1 = stack_pop(s3);
+		//printf("%d\n", t1);
+		stack_push(s2, t1);
+	}
+
+	// Get rid of the temporary stack
+	//stack_drop(s3);
+	return s2;
 }
 
 /**

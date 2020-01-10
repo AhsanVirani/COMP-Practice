@@ -21,4 +21,7 @@ void stack_push (Stack, Item);
 /** Get the number of items in a stack. */
 size_t stack_size (Stack);
 
+Stack 
+stack_stacks (Stack, Stack);
+
 #endif // !defined(PRAC__STACK_H)
