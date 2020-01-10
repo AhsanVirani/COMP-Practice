@@ -12,6 +12,7 @@
 
 typedef int Item;
 
+
 static inline Item item_clone (Item it) { return it; }
 static inline void item_drop (Item it __attribute__((unused))) { return; }
 static inline bool item_eq (Item a, Item b) { return a == b; }
