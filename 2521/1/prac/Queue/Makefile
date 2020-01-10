@@ -13,4 +13,4 @@ item.o:	item.h item.c
 item_test.o:	item_test.c item.h item.c
 
 clean:
-	-rm -f item_test *.o core
+	-rm -f $(BINS) *.o core
