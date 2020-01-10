@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 
 typedef char Item;
 typedef struct dnode *node;
@@ -8,6 +9,14 @@ struct dnode{
 	Item	item;
 	node	prev, next;
 };
+
+node
+new_node()
+{
+	node n = malloc(sizeof(*n));
+	assert(n != NULL);
+	n->item = '\0'; n->next = NULL; n->prev = NULL;
+}
 
 node append(node list1, node list2)
 {
@@ -48,10 +57,10 @@ int
 main(void)
 {
 
-	node n1 = malloc(sizeof(*n1));
+	node n1 = new_node();
 	n1->item = 'a'; n1->next = NULL; n1->prev = NULL;
 
-	node n2 = malloc(sizeof(*n2));
+	node n2 = new_node();
 	n2->item = 'b'; n2->next = NULL; n2->prev = NULL;
 	
 	node n3 = append(n1, n2);
