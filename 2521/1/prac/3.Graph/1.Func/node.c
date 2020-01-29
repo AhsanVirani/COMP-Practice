@@ -71,6 +71,8 @@ set_next(node n, node next)
 {
 	assert(n != NULL);
 	n->next = next;
+	if (next != NULL)
+		set_prev(next, n);
 }
 
 node
