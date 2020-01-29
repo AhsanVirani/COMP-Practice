@@ -6,10 +6,8 @@
 
 
 typedef struct _node {
-	Item	name;
-	void	*data;
-	node	next;
-	node	prev;
+	Item	name;	void	*data;
+	node	next;	node	prev;
 } _node;
 
 node
