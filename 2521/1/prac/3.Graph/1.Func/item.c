@@ -45,7 +45,7 @@ item_show (Item it)
 	printf("%s\n", it);
 }
 
-Item 
+Item
 item_clone (Item it){
 	assert(it != NULL);
 	Item c_it = NULL;

@@ -21,6 +21,15 @@ create_node(void)
 }
 
 void
+destroy_node(node n)
+{
+	assert(n != NULL);
+	if (n->name != NULL)
+		destroy_name(n);
+	free(n);
+}
+
+void
 set_name(node n, Item name)
 {
 	assert(n != NULL && name != NULL);

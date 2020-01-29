@@ -21,6 +21,9 @@ void
 destroy_name(node n);
 
 void
+destroy_node(node n);
+
+void
 set_data(node n, void *data);
 
 void *

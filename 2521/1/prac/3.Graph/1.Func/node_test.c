@@ -44,6 +44,8 @@ main(void)
 	for(node curr = cities; curr != NULL; curr = get_next(curr))
 	{
 		printf("Welcome to %s city\n", get_name(curr));
+		if (get_prev(curr) != NULL)
+			destroy_node(get_prev(curr));
 		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			//printf("Your suburb is %s\n", ncurr->name);
 	}
