@@ -4,7 +4,6 @@
 
 #include "node.h"
 
-
 typedef struct _node {
 	Item	name;	void	*data;
 	node	next;	node	prev;
@@ -140,3 +139,4 @@ white_test(void)
 
 	return EXIT_SUCCESS;
 }
+
