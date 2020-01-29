@@ -20,3 +20,4 @@ https://www.gnu.org/software/libc/manual/html_node/Important-Data-Types.html
 
 https://www.fsf.org/resources/
 
+http://crasseux.com/books/ctutorial/

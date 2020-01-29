@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 #include <stdlib.h>
 
 typedef struct _node *node;
@@ -37,7 +36,6 @@ main(void)
 	islamabad->next->next = (node)malloc(sizeof(*islamabad));
 	islamabad->next->next->name = "G-Sector";
 	islamabad->next->next->next = NULL;
-
 	
 	node rawalpindi = (node)malloc(sizeof(*rawalpindi));
 	rawalpindi->name = "R1";
@@ -52,7 +50,8 @@ main(void)
 	for(node curr = cities; curr != NULL; curr = curr->next)
 	{
 		printf("Welcome to %s city\n", curr->name);
-		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)	printf("Your suburb is %s\n", ncurr->name);		
+		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
+			printf("Your suburb is %s\n", ncurr->name);
 	}
 
 	return EXIT_SUCCESS;
