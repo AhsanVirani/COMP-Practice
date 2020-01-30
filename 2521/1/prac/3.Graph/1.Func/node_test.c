@@ -29,7 +29,7 @@ main(void)
 	islamabad->next->next = create_node();
 	islamabad->next->next->name = "G-Sector";
 	islamabad->next->next->next = NULL;
-	
+
 	node rawalpindi = create_node();
 	rawalpindi->name = "R1";
 	rawalpindi->next = create_node();
@@ -47,9 +47,13 @@ main(void)
 		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			//printf("Your suburb is %s\n", ncurr->name);
 	}
+	for(node curr = cities; curr != NULL; curr = get_next(curr))
+	{
+		//printf("Welcome to %s city\n", get_name(curr));
+		destroy_node (curr);
+		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
+			//printf("Your suburb is %s\n", ncurr->name);
+	}
 
 	return EXIT_SUCCESS;
 }
-
-
-

@@ -11,16 +11,6 @@ typedef struct _node {
 	node	prev;
 } _node;
 
-void
-set_name(node n, char *name)
-{
-	assert(n != NULL && name != NULL);
-
-
-
-
-}
-
 int
 main(void)
 {
