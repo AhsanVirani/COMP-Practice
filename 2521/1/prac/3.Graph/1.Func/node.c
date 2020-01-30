@@ -104,6 +104,31 @@ get_prev(node n)
 	return n->prev;
 }
 
+void
+insert_after(node n, node m)
+{
+	assert(n != NULL && m != NULL);
+	if(n->next == NULL)	set_next(n, m);
+	else
+	{
+		set_next(m, get_next(n));
+		set_next(n, m);
+	}
+}
+
+
+void
+insert_before(node n, node m)
+{
+	assert(n != NULL && m != NULL);
+	if(get_prev(n) == NULL)	set_next(m, n);
+	else
+	{
+		set_next(get_prev(n), m);
+		set_next(m, n);
+	}
+}
+
 int
 white_test(void)
 {

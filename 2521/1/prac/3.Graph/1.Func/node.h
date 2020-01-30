@@ -44,6 +44,12 @@ set_prev(node n, node prev);
 node
 get_prev(node n);
 
+void
+insert_after(node n, node m);
+
+void
+insert_before(node n, node m);
+
 int
 white_test(void);
 
