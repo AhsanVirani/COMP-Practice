@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-
+//atom://teletype/portal/0a25f2ac-4e73-43ed-a9ef-1bbaa95a4206
 typedef struct _node *node;
 
 typedef struct _node {
@@ -15,7 +15,7 @@ void
 set_name(node n, char *name)
 {
 	assert(n != NULL && name != NULL);
-	
+
 
 
 
@@ -47,7 +47,7 @@ main(void)
 	islamabad->next->next = (node)malloc(sizeof(*islamabad));
 	islamabad->next->next->name = "G-Sector";
 	islamabad->next->next->next = NULL;
-	
+
 	node rawalpindi = (node)malloc(sizeof(*rawalpindi));
 	rawalpindi->name = "R1";
 	rawalpindi->next = (node)malloc(sizeof(*rawalpindi));
