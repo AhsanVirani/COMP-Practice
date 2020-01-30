@@ -26,6 +26,8 @@ destroy_node(node n)
 	assert(n != NULL);
 	if (n->name != NULL)
 		destroy_name(n);
+	if (n->data != NULL)
+		destroy_data(n);
 	free(n);
 }
 
@@ -67,7 +69,7 @@ get_data(node n)
 
 void
 destroy_data(node n)
-{	
+{
 	assert(n != NULL);
 	free(n->data);
 }
@@ -128,7 +130,7 @@ white_test(void)
 	islamabad->next->next = (node)malloc(sizeof(*islamabad));
 	islamabad->next->next->name = "G-Sector";
 	islamabad->next->next->next = NULL;
-	
+
 	node rawalpindi = (node)malloc(sizeof(*rawalpindi));
 	rawalpindi->name = "R1";
 	rawalpindi->next = (node)malloc(sizeof(*rawalpindi));
@@ -145,7 +147,13 @@ white_test(void)
 		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			printf("Your suburb is %s\n", ncurr->name);
 	}
+	for(node curr = cities; curr != NULL; curr = curr->next)
+	{
+		//printf("Welcome to %s city\n", curr->name);
+		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
+			free (ncurr);//printf("Your suburb is %s\n", ncurr->name);
+		free (curr);
+	}
 
 	return EXIT_SUCCESS;
 }
-
