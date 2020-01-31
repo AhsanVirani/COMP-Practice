@@ -130,7 +130,7 @@ insert_before(node n, node m)
 }
 
 int
-main(void)
+white_test(void)
 {
 	node cities = (node)malloc(sizeof(*cities));
 	cities->name = "Karachi";
