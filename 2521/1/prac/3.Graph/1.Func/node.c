@@ -130,6 +130,18 @@ insert_before(node n, node m)
 	}
 }
 
+void
+show_node(node n)
+{
+	assert(n != NULL);
+	printf("Address of this node %p\n Item: ", n);
+	if(n->name != NULL)	item_show(n->name);
+	printf("\n");
+	if(n->data != NULL)	printf("Data address: %p\n", n->data);
+	printf("Prev: %p \t and \t Next: %p\n", n->prev, n->next);
+	
+}
+
 int
 white_test(void)
 {

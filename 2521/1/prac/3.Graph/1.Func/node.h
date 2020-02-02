@@ -44,11 +44,16 @@ set_prev(node n, node prev);
 node
 get_prev(node n);
 
+// inserting m after n 	n->m
 void
 insert_after(node n, node m);
 
+// inserting m before n	m->n
 void
 insert_before(node n, node m);
+
+void
+show_node(node n);
 
 int
 white_test(void);

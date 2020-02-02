@@ -1,15 +1,15 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 
-#include "node.h"
+#include "list.h"
 
-typedef struct _list *list;
 
 typedef struct _list {
     size_t  size;
     node    head;
     node    tail;
-} list;
+} _list;
 
 list
 create_list()
@@ -80,14 +80,20 @@ get_size(list l)
 	return l->size;
 }
 
-void
-add_node(list l, Item name, void *data)
+node
+make_node(Item name, void *data)
 {
-	assert(l != NULL);
 	node n = create_node();
 	set_name(n, name);
 	set_data(n, data);
 
+	return n;
+}
+
+void
+add_node(list l, node n)
+{
+	assert(l != NULL && n != NULL);
 	if(l->tail == NULL)
 	{
 		l->head = n;	l->tail = l->head;
@@ -99,8 +105,36 @@ add_node(list l, Item name, void *data)
 }
 
 void
-insert_node(list l, node n)
+insert_node(list l, size_t pos, node n)	
 {
+	assert(l != NULL && n != NULL);
+	// Insert at head
+	if(l->size == 0)	set_head(l, n);
 
+	else if((double)(pos/l->size)*100.0 <= 50.0) // list a b c d add at pos 2 which is b.
+	{
+		node curr = l->head;
+		for(int i = 1; i < pos; i++)	curr = get_next(curr);
+		insert_after(curr, n);
 
+	} else // list a b c d add at pos 3 which is b.
+	{ 
+		node curr = l->tail;
+		for(int i = l->size; i >= pos; i--)			curr = get_prev(curr);
+		insert_before(curr, n);
+	}
+
+	l->size++;
 }
+
+void
+show_list(list l)
+{
+	assert(l != NULL);
+	for(node curr = l->head; curr != NULL; curr = get_next(curr))	show_node(curr);
+}
+
+
+
+
+
