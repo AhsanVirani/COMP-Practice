@@ -109,19 +109,23 @@ void
 insert_node(list l, size_t pos, node n)	
 {
 	assert(l != NULL && n != NULL);
+	printf("herasdgagdfe\n");
 	// Insert at head
-	if(l->size == 0)	set_head(l, n);
-
-	else if((double)(pos/l->size)*100.0 <= 50.0) // list a b c d add at pos 2 which is b.
+	if(l->size == 0)
 	{
+		set_head(l, n);
+	} else if((double)(pos/l->size)*100.0 <= 50.0)
+	{ // list a b c d add at pos 2 which is b.
+		printf("heradfe\n");
 		node curr = l->head;
 		for(int i = 1; i < pos; i++)	curr = get_next(curr);
 		insert_after(curr, n);
 
 	} else // list a b c d add at pos 3 which is b.
-	{ 
+	{	printf("here\n");
 		node curr = l->tail;
 		for(int i = l->size; i >= pos; i--)			curr = get_prev(curr);
+		printf("%p\n", curr);
 		insert_before(curr, n);
 	}
 
