@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include "item.h"
 #include "node.h"
 
 typedef struct _node {
@@ -12,7 +13,7 @@ typedef struct _node {
 node
 create_node(void)
 {
-	node new = (node)malloc(sizeof(*new));
+	node new = (node)malloc(sizeof(*node));
 	assert(new != NULL);
 	new->name = NULL; new->data = NULL;
 	new->next = NULL; new->prev = NULL;
