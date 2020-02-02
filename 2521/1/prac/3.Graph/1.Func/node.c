@@ -173,59 +173,20 @@ white_test(void)
 		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			printf("Your suburb is %s\n", ncurr->name);
 	}
-	for(node curr = cities; curr != NULL; curr = curr->next)
+	node tmp1=cities;
+	node tmp2=cities->data;
+	for(node curr = cities; curr != NULL; curr = tmp1)
 	{
 		//printf("Welcome to %s city\n", curr->name);
-		for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
+		for(node ncurr = curr->data; ncurr != NULL; ncurr = tmp2)
+		{
+			tmp2=ncurr->next;
 			free (ncurr);//printf("Your suburb is %s\n", ncurr->name);
+		}
+		tmp1=curr->next;
 		free (curr);
 	}
-	// INSERT AFTER TEST
-	node test = create_node();
-	set_name(test, "hello");
-	node test_l = create_node();
-	set_next(test, test_l);
-	set_name(get_next(test), "world");
-	node test_insert = create_node();
-	set_name(test_insert, " ");
-	insert_after(test, test_insert);
-	//forward test insert after
-	for(node curr = test; curr != NULL; curr = get_next(curr))
-	{
-		printf("%s\n", get_name(curr));
-	}
-	//backward test insert after
-	for(node curr = test_l; curr != NULL; curr = get_prev(curr))
-	{
-		printf("%s\n", get_name(curr));
-	}
-	for(node curr = test_l; curr != NULL; curr = get_prev(curr))
-	{
-		destroy_node(curr);
-	}
-	// INSERT BEFORE test
-	node b_test = create_node();
-	set_name(b_test, "hello");
-	node b_test_l = create_node();
-	set_next(b_test, b_test_l);
-	set_name(get_next(b_test), "world");
-	node b_test_insert = create_node();
-	set_name(b_test_insert, " ");
-	insert_before(b_test_l, b_test_insert);
-	//forward test insert after
-	for(node curr = b_test; curr != NULL; curr = get_next(curr))
-	{
-		printf("%s\n", get_name(curr));
-	}
-	//backward test insert after
-	for(node curr = b_test_l; curr != NULL; curr = get_prev(curr))
-	{
-		printf("%s\n", get_name(curr));
-	}
-	for(node curr = b_test_l; curr != NULL; curr = get_prev(curr))
-	{
-		destroy_node(curr);
-	}
+
 
 
 	return EXIT_SUCCESS;
