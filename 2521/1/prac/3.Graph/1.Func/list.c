@@ -99,7 +99,8 @@ add_node(list l, node n)
 		l->head = n;	l->tail = l->head;
 	} else
 	{
-		set_next(l->tail, n);	
+		set_next(l->tail, n);
+		l->tail = n;
 	}	
 	l->size++;
 }

@@ -35,7 +35,7 @@ destroy_node(node n)
 void
 set_name(node n, Item name)
 {
-	assert(n != NULL && name != NULL);
+	assert(n != NULL);
 	n->name = item_clone(name);
 }
 
@@ -57,7 +57,7 @@ destroy_name(node n)
 void
 set_data(node n, void *data)
 {
-	assert(n != NULL && data != NULL);
+	assert(n != NULL);
 	n->data = data;
 }
 
