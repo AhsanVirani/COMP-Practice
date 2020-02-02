@@ -13,7 +13,7 @@ typedef struct _node {
 node
 create_node(void)
 {
-	node new = (node)malloc(sizeof(*node));
+	node new = (node)malloc(sizeof(*new));
 	assert(new != NULL);
 	new->name = NULL; new->data = NULL;
 	new->next = NULL; new->prev = NULL;

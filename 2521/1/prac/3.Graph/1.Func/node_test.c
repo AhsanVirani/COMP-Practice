@@ -47,13 +47,18 @@ main(void)
 		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			//printf("Your suburb is %s\n", ncurr->name);
 	}
-	for(node curr = cities; curr != NULL; curr = get_next(curr))
+
+	node tmp = cities;
+	node curr = cities;
+	while(curr != NULL)
 	{
-		//printf("Welcome to %s city\n", get_name(curr));
-		destroy_node (curr);
-		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
-			//printf("Your suburb is %s\n", ncurr->name);
+		curr = get_next(curr);
+		destroy_node(tmp);
+		tmp = curr;
 	}
+	tmp = NULL; curr = NULL;
+
+	printf("1x\n");
 	// INSERT AFTER TEST
 	node test = create_node();
 	set_name(test, "hello");
@@ -66,25 +71,39 @@ main(void)
 	//forward test insert after
 	for(node curr = test; curr != NULL; curr = get_next(curr))
 	{
+		printf("%p->", curr);
 		printf("%s\n", get_name(curr));
 	}
 	//backward test insert after
 	for(node curr = test_l; curr != NULL; curr = get_prev(curr))
 	{
+		printf("%p->", curr);
 		printf("%s\n", get_name(curr));
 	}
-	for(node curr = test_l; curr != NULL; curr = get_prev(curr))
+	printf("test: %p\n", test);
+	node i_tmp = test;
+	node i_curr = test;
+	printf("i_tmp: %p\n", i_tmp);
+
+	while(i_curr != NULL)
 	{
-		destroy_node(curr);
+		i_curr = get_next(i_curr);
+		printf("%p->", i_tmp);
+		printf("%p->%s\n", i_tmp, get_name(i_tmp));
+		destroy_node(i_tmp);
+		i_tmp = i_curr;
 	}
+	i_tmp = NULL; i_curr = NULL;
+
+	printf("2x\n");
 	// INSERT BEFORE test
 	node b_test = create_node();
-	set_name(b_test, "hello");
+	set_name(b_test, "hell");
 	node b_test_l = create_node();
 	set_next(b_test, b_test_l);
-	set_name(get_next(b_test), "world");
+	set_name(get_next(b_test), "worl");
 	node b_test_insert = create_node();
-	set_name(b_test_insert, " ");
+	set_name(b_test_insert, " -");
 	insert_before(b_test_l, b_test_insert);
 	//forward test insert after
 	for(node curr = b_test; curr != NULL; curr = get_next(curr))
@@ -96,10 +115,17 @@ main(void)
 	{
 		printf("%s\n", get_name(curr));
 	}
-	for(node curr = b_test_l; curr != NULL; curr = get_prev(curr))
+
+	node d_tmp = b_test;
+	node d_curr = b_test;
+	while(d_curr != NULL)
 	{
-		destroy_node(curr);
+		d_curr = get_next(d_curr);
+		printf("%p->%s\n", d_tmp, get_name(d_tmp));
+		destroy_node(d_tmp);
+		d_tmp = d_curr;
 	}
+
 
 	return EXIT_SUCCESS;
 }
