@@ -15,7 +15,6 @@ main(void)
 	add_node(l, n1);
 	node n2 = make_node("kills", NULL);
 	add_node(l, n2);
-	printf("list size %d\n", get_size(l));
 	show_list(l);
 	destroy_list(l);
 

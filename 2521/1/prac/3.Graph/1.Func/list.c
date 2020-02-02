@@ -132,10 +132,7 @@ void
 show_list(list l)
 {
 	assert(l != NULL);
+	printf("LIST SIZE: %d\n", get_size(l));
 	for(node curr = l->head; curr != NULL; curr = get_next(curr))	show_node(curr);
 }
-
-
-
-
 

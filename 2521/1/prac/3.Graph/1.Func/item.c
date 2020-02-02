@@ -42,7 +42,7 @@ void
 item_show (Item it)
 {
 	assert(it != NULL);
-	printf("%s\n", it);
+	printf("%s", it);
 }
 
 Item
