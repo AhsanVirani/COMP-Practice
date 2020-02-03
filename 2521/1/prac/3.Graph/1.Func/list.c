@@ -109,23 +109,34 @@ void
 insert_node(list l, size_t pos, node n)	
 {
 	assert(l != NULL && n != NULL);
-	printf("herasdgagdfe\n");
 	// Insert at head
-	if(l->size == 0)
+	if(l->size == 0)	
+	{	set_head(l, n);
+	}	
+
+	else if(pos == 1)
+	{	insert_after(n, l->head);
+		l->head = n;
+	}
+
+	else if((l->size+1) == (pos))
 	{
-		set_head(l, n);
-	} else if((double)(pos/l->size)*100.0 <= 50.0)
-	{ // list a b c d add at pos 2 which is b.
-		printf("heradfe\n");
+		add_node(l, n);
+		l->size--;
+	}	
+
+	else if(((double)pos/(double)l->size)*100.0 <= 50.0)
+	{ // list cor vi kills chongi add at pos 2 testing.
 		node curr = l->head;
 		for(int i = 1; i < pos; i++)	curr = get_next(curr);
-		insert_after(curr, n);
+		insert_before(curr, n);
 
-	} else // list a b c d add at pos 3 which is b.
-	{	printf("here\n");
+	} 
+	
+	else // list corona virus kills  add at pos 2 add chongi.
+	{	
 		node curr = l->tail;
-		for(int i = l->size; i >= pos; i--)			curr = get_prev(curr);
-		printf("%p\n", curr);
+		for(int i = l->size; i > (pos); i--)			curr = get_prev(curr);
 		insert_before(curr, n);
 	}
 

@@ -47,7 +47,6 @@ main(void)
 		//for(node ncurr = curr->data; ncurr != NULL; ncurr = ncurr->next)
 			//printf("Your suburb is %s\n", ncurr->name);
 	}
-
 	node tmp = cities;
 	node curr = cities;
 	while(curr != NULL)
