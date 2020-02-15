@@ -1,3 +1,7 @@
+# By Ahsan Muhammad
+# Modified 15/2/20
+# Learning R basics
+
 usedcars <- read.csv("usedcars.csv", stringsAsFactors = FALSE)
 str(usedcars)
 summary(usedcars[c("price", "mileage")])
@@ -33,3 +37,7 @@ plot(x = usedcars$mileage, y = usedcars$price,
       ylab = "Used Car Price ($)")
 install.packages("gmodels")
 library(gmodels)
+usedcars$conservative <- 
+  usedcars$color %in% c("Black", "Gray", "Silver", "White")
+table(usedcars$conservative)
+CrossTable(x = usedcars$model, y = usedcars$conservative, chisq = TRUE)
