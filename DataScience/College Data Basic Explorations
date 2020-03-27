@@ -25,3 +25,14 @@ par(mar=c(5.1,4.1,4.1,2.1))
 par(mfrow=c(1,1))
 hist(college$Outstate, col="green", xlab="Outstate", ylab="Frequency")
 
+
+## Some interesting observations
+# Find position. what is the university with the most students in the top 10% of class
+college[which.max(college$Top10perc),]
+acceptance_rate = college$Accept/college$Apps
+# College with min acceptance rate
+college[which.min(acceptance_rate),]
+# college with max acceptance rate
+college[which.max(acceptance_rate),]
+
+
