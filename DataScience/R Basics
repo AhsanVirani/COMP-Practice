@@ -44,3 +44,15 @@ A[1:2,]
 A[1,]
 A[-c(1,3),]
 dim(A)
+
+#Loading Data
+Auto = read.table("Auto.data")
+fix(Auto)
+?read.table
+Auto=read.table("Auto.data", header = T, na.strings = "?")
+fix(Auto)
+Auto=read.csv("Auto.csv", header = T, na.strings = "?")
+fix(Auto)
+dim(Auto)
+Auto[1:4,]
+names(Auto)
