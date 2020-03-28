@@ -69,3 +69,11 @@ names(Carseats)
 lm.fit=lm(Sales~.+Income:Advertising+Price:Age,data=Carseats)
 summary(lm.fit)
 contrasts(ShelveLoc)
+
+# Writing Function to call our MASS and ISLR libraries
+LoadLibraries=function(){
+  library(MASS)
+  library(ISLR)
+  print("The Libraries Have Been Loaded")
+}
+LoadLibraries()
