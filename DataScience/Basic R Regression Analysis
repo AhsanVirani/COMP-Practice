@@ -77,3 +77,25 @@ LoadLibraries=function(){
   print("The Libraries Have Been Loaded")
 }
 LoadLibraries()
+
+# ANSWERS TO QUESTIONS
+# Q8
+library(ISLR)
+library(MASS)
+Auto = read.csv("Auto.csv")
+str(Auto)
+attach(Auto)
+# Fitting linear Model
+Auto$horsepower = as.integer(horsepower)
+lm.fit = lm(mpg~horsepower, data = Auto)
+?lm
+summary(lm.fit)
+# CI AND PI at 95% 
+confint(lm.fit, level = 0.95)
+predict(lm.fit, data.frame(horsepower=c(100, 110, 120)),interval='prediction',level=0.95)
+?predict
+# Plotting 
+plot(horsepower, mpg)
+?abline
+abline(lm.fit, col="blue")
+plot(lm.fit)
