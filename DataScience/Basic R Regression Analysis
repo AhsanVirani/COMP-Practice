@@ -1,0 +1,71 @@
+## MASS and ISLR libraries contain Statistics functions to perform LR etc
+library(MASS)
+library(ISLR)
+names(Boston)
+?Boston
+#Fits a linear model
+lm.fit = lm(medv~lstat, data = Boston)
+?lm
+summary(lm.fit)
+names(lm.fit)
+coef(lm.fit)
+confint(lm.fit)
+?confint
+
+# Predictions
+predict(lm.fit, data.frame(lstat=(c(5,10,15))), interval = "confidence")
+predict(lm.fit, data.frame(lstat=(c(5,10,15))), interval = "prediction")
+plot(Boston$lstat, Boston$medv)
+abline(lm.fit)
+# Different Width
+abline(lm.fit, lwd=3)
+abline(lm.fit, lwd=3, col="Red")
+plot(Boston$lstat, Boston$medv, col="Red")
+# pch function can change data points shape
+plot(Boston$lstat, Boston$medv, pch=20)
+plot(Boston$lstat, Boston$medv, pch="+")
+
+plot(lm.fit)
+plot(predict(lm.fit), residuals(lm.fit))
+plot(predict(lm.fit), rstudent(lm.fit))
+# Leverage predictor
+plot(hatvalues(lm.fit))
+which.max(hatvalues(lm.fit))
+
+# Multiple Regression
+lm.fit = lm(medv~lstat+age, data = Boston)
+summary(lm.fit)
+lm.fit = lm(medv~., data = Boston)
+summary(lm.fit)
+summary(lm.fit)$r.sq
+?summary.lm
+
+attach(Boston)
+
+# All variables in regression except age
+lm.fit = lm(medv~.-age,data = Boston)
+summary(lm.fit)
+lm.fit = update(lm.fit,~.-age)
+
+# Interaction term
+lm.fit = lm(medv~lstat*age,data = Boston)
+summary(lm.fit)
+# Raising to power
+lm.fit2 = lm(medv~lstat+I(lstat^2),data = Boston)
+summary(lm.fit2)
+# anova() function to further quantify the extent to which the quadratic fit is superior to a linear fit
+lm.fit = lm(medv~lstat)
+anova(lm.fit,lm.fit2)
+plot(lm.fit)
+
+#polynomial fit
+lm.fitp = lm(medv~poly(lstat,5))
+summary(lm.fitp)
+
+# Qualitative Predictors
+attach(Carseats)
+fix(Carseats)
+names(Carseats)
+lm.fit=lm(Sales~.+Income:Advertising+Price:Age,data=Carseats)
+summary(lm.fit)
+contrasts(ShelveLoc)
