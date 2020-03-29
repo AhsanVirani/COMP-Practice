@@ -126,3 +126,20 @@ summary(Mul.Reg1)
 # Checking whether its a better model
 ?anova
 anova(Mul.Reg, Mul.Reg1)
+
+######################### QUESTION 10
+fix(Carseats)
+
+## Reg
+attach(Carseats)
+lm.fit = lm(Sales ~ Population+Urban+US, data = Carseats)
+summary(lm.fit)
+lm.fit1 = lm(Sales ~ US, data = Carseats)
+summary(lm.fit1)
+anova(lm.fit1, lm.fit)
+?anova
+
+# CI
+confint(lm.fit1)
+# High Leverage Points
+plot(lm.fit1)
