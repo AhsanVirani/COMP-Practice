@@ -78,8 +78,8 @@ LoadLibraries=function(){
 }
 LoadLibraries()
 
-# ANSWERS TO QUESTIONS
-# Q8
+################################################### ANSWERS TO QUESTIONS ##########################################################
+###################################### Question 8
 library(ISLR)
 library(MASS)
 Auto = read.csv("Auto.csv")
@@ -99,3 +99,30 @@ plot(horsepower, mpg)
 ?abline
 abline(lm.fit, col="blue")
 plot(lm.fit)
+
+######################################## Question 9
+pairs(Auto) # cant see anythinhg clearly here
+str(Auto)
+Auto$name = as.factor(name)
+# Computing correlations of variables except names (a factor)
+?cor
+corr.mat = cor(Auto[,-9])
+corr.mat
+# Multiple Regression fit
+Mul.Reg = lm(mpg~.-name, data = Auto)
+summary(Mul.Reg)
+# plot of regression
+# Setting margins and space to plot 4 images side by side
+par(mfrow=c(2,2))
+par(mar = c(1,1,1,1))
+plot(Mul.Reg)
+# defaulting image space
+par(mfrow=c(1,1))
+par(mar = c(5.1, 4.1, 4.1, 2.1))
+
+# Adding an interaction term in the analysis
+Mul.Reg1 = lm(mpg~.-name + horsepower:weight, data = Auto)
+summary(Mul.Reg1)
+# Checking whether its a better model
+?anova
+anova(Mul.Reg, Mul.Reg1)
