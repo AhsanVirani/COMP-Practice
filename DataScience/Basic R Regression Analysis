@@ -175,3 +175,22 @@ legend( -3, 1, c("estimated","truth"), col=c("black","green"), lty=c(1,1) )
 fit1 = lm(y~poly(X, degree = 2))
 summary(fit1)
 anova(fit1, fit)
+
+######################## Question 14
+# Collinearity Problem
+set.seed(1)
+?runif
+x1=runif(100)
+x2=0.5*x1+rnorm(100)/10
+y=2+2*x1+0.3*x2+rnorm(100)
+corrXY <- cor(x1,x2)
+fit = lm(y~x1+x2)
+summary(fit)
+fit1 = lm(y~x1)
+fit2 = lm(y~x2)
+x1 = c(x1,0.1)
+x2 = c(x2,0.8)
+y = c(y,6)
+plot(lm(y~x1+x2))
+plot(lm(y~x1))
+plot(lm(y~x2))
