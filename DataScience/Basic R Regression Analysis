@@ -153,3 +153,25 @@ lm.fit = lm(y~x+0)
 summary(lm.fit)
 lm.fit1 = lm(x~y+0)
 summary(lm.fit1)
+
+############################ QUESTION 13
+set.seed(1)
+X = rnorm(100)
+?rnorm
+eps = rnorm(100, mean=0, sd=sqrt(0.25))
+y_pure = -1+0.5*X
+length(y_pure)
+y = y_pure + eps
+plot(x, y)
+fit = lm(y~x)
+summary(fit)
+?abline
+abline(fit, col='Red')
+abline( a=-1, b=1/2, col='green' ) 
+legend( -3, 1, c("estimated","truth"), col=c("black","green"), lty=c(1,1) )
+?legend
+
+# Quad fit
+fit1 = lm(y~poly(X, degree = 2))
+summary(fit1)
+anova(fit1, fit)
