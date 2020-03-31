@@ -21,3 +21,37 @@ sum(lda.pred$posterior[,1]<0.5)
 lda.pred$posterior[1:20, 1]
 lda.class[1:20]
 sum(lda.pred$posterior[,1]>.9)
+
+##################### QUADRATIC DISCRIMINANT ANALYSIS ##########################
+### qda() function. IN MASS LIBRARY. Identical syntax to LDA
+
+qda.fit=qda(Direction~Lag1+Lag2,data=Smarket,subset = train)
+qda.fit
+qda.class=predict(qda.fit,Smarket.2005)$class
+attributes(qda.class)
+qda.class$class
+?attributes
+?predict
+table(qda.class, Direction.2005)
+mean(qda.class==Direction.2005)
+
+#################### K-Nearest-Neighbour (KNN) #############################
+## Part of Class Library
+## knn() function forms predictions using a single command
+library(class)
+?knn
+?cbind
+## cbind() funciton combines vectors or matrices into one data frame
+train.X=cbind(Lag1,Lag2)[train,]
+test.X=cbind(Lag1,Lag2)[!train,]
+train.Direction=Direction[train]
+set.seed(1)
+# With k = 1
+knn.pred=knn(train.X,test.X,train.Direction,k=1)
+table(knn.pred,Direction.2005)
+mean(knn.pred==Direction.2005)
+
+# With k = 3
+knn.pred=knn(train.X,test.X,train.Direction,k=3)
+table(knn.pred,Direction.2005)
+mean(knn.pred==Direction.2005)
