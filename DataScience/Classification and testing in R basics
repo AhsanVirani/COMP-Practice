@@ -48,3 +48,15 @@ table(glm_pred, Direction.2005)
 mean(glm_pred==Direction.2005)
 ## Test Error Rate
 mean(glm_pred!=Direction.2005)
+
+## Lag3-5 very large p-value
+glm_fit1 = glm(Direction~Lag1+Lag2,data=Smarket, family = binomial,subset = train)
+summary(glm_fit1)
+glm_probs1 = predict(glm_fit1, Smarket.2005,type="response")
+glm_pred1 = rep("Down", 252) 
+glm_pred1[glm_probs1>0.5] = "Up"
+table(glm_pred1, Direction.2005)
+mean(glm_pred1 == Direction.2005)
+
+predict(glm_fit1, newdata = data.frame(Lag1=c(1.2,1.5), Lag2=c(1.1,-0.8)),
+                                        type="response")
