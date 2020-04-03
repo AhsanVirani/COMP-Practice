@@ -1,0 +1,47 @@
+## Analysing Stock Market Data using R
+# Using Quantmod package -> For Quantitative financial modelling
+install.packages("quantmod")
+library(quantmod)
+?quantmod
+
+?getSymbols
+# Load and Manage Data from Multiple Sources
+getSymbols('^GSPC', src='yahoo')
+dim(GSPC)
+head(GSPC)
+tail(GSPC)
+class(GSPC)
+# Time series data
+summary(GSPC)
+
+# loading YELP, AMAZON AND APPLE DATA
+basket_symbols <- c('YELP', 'AMZN', 'AAPL')
+getSymbols(basket_symbols, src='yahoo')
+# Merge all 3 time series data into 1 data frame
+?merge
+basket <- data.frame(as.xts(merge(YELP, AMZN, AAPL)))
+class(basket)
+tail(basket)
+head(basket)
+# YELP founded later. AMZN and AAPL already there since start
+
+## Graph Plotting with quantmod
+
+plot(GSPC)
+names(GSPC)
+?lineChart
+lineChart(GSPC, line.type = 'h', theme = 'white')
+barChart(GSPC, bar.type = 'hlc', TA = NULL)
+candleChart(GSPC, TA = NULL, subset = '2015')
+# From 2015-01 to all the way
+candleChart(GSPC, TA = NULL, subset = '2015-01::')
+# From 2015-01 to March
+candleChart(GSPC, subset = '2015-01::2015-03')
+# Changing Themes
+?candleChart
+candleChart(GSPC, theme = 'white', subset = '2015-01::2015-03')
+?chartTheme
+candleChart(GSPC, theme = chartTheme(theme = 'white', up.col='green',dn.col='darkred'),
+            subset = '2015-01::2015-03')
+chartSeries(GSPC,
+            type = c('matchsticks'), subset = '2015-01')            
