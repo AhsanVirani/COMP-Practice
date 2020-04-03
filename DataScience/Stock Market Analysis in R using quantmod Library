@@ -45,3 +45,22 @@ candleChart(GSPC, theme = chartTheme(theme = 'white', up.col='green',dn.col='dar
             subset = '2015-01::2015-03')
 chartSeries(GSPC,
             type = c('matchsticks'), subset = '2015-01')            
+
+######### ADDING INDICATORS TO OUR QUANTMOD CHARTS
+## INDICATORS IN TTR PACKAGE
+install.packages("TTR")
+library(TTR)
+?TTR
+chartSeries(GSPC, TA = "addVo();addBBands();addCCI()",theme='white', subset = '2015')
+addSMA(n=200)
+addROC(n=200)
+?EMA
+GSPC.EMA.20 <- EMA(GSPC$GSPC.Close, n=20)
+GSPC.EMA.100 <- EMA(GSPC$GSPC.Close, n=100)
+head(GSPC.EMA.20, 25)
+tail(GSPC.EMA.20)
+?addTA
+chartSeries(GSPC, theme = chartTheme('white'), up.col = 'black', dn.col = 'black', subset = '2015')
+addTA(GSPC.EMA.20, on=1, col='red')
+addTA(GSPC.EMA.100, on=1, col='blue')
+addTA(GSPC.EMA.20 - GSPC.EMA.100, col='blue', type = 'h', legend = "20-100 MA")
