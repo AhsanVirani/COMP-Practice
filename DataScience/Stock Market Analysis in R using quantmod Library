@@ -64,3 +64,142 @@ chartSeries(GSPC, theme = chartTheme('white'), up.col = 'black', dn.col = 'black
 addTA(GSPC.EMA.20, on=1, col='red')
 addTA(GSPC.EMA.100, on=1, col='blue')
 addTA(GSPC.EMA.20 - GSPC.EMA.100, col='blue', type = 'h', legend = "20-100 MA")
+
+
+
+
+
+
+################## Create simple MA from Scratch ####################
+getSymbols('QQQ', src='yahoo')
+plot(QQQ$QQQ.Close)
+period <- 100
+price_vector <- QQQ$QQQ.Close
+length(price_vector)
+moving_average_vector <- rep(NA, period)
+## Look to traverse the vector and assign MA values
+for (ind in seq((period+1),length(price_vector))) {
+  moving_average_vector <- 
+    c(moving_average_vector, mean(price_vector[(ind-period):ind]))
+}
+
+par(mfrow=c(1,1))
+plot(QQQ$QQQ.Close)
+plot(moving_average_vector, type='l', col='red', lwd=3,
+     main=paste('SMA', period))
+length(moving_average_vector)
+length(price_vector)
+head(moving_average_vector)
+QQQ$QQQ.Close.SMA <- moving_average_vector
+plot(QQQ$QQQ.Close)
+lines(QQQ$QQQ.Close.SMA, type='l', col='red', lwd=3)
+
+getSymbols(c('QQQ'), src='yahoo')
+chartSeries(QQQ, theme = 'white', TA="addSMA(100)")
+
+getSymbols(c('^IBEX'), src='yahoo')
+chartSeries(IBEX, theme = 'white', TA="addSMA(100)")
+IBEX <- na.exclude(IBEX)
+
+#### Adding 2 moving avg - slow and fast
+chartSeries(IBEX$IBEX.Close, theme = "white",
+            TA="addEMA(n=50, col='black');addEMA(n=200, col='blue')")
+
+chartSeries(GSPC$GSPC.Close, theme = "white",
+            TA="addEMA(n=50, col='black');addEMA(n=200, col='blue')")
+
+library(TTR)
+GSPC.EMA.50 <- EMA(GSPC$GSPC.Close, n=50)
+GSPC.EMA.200 <- EMA(GSPC$GSPC.Close, n=200)
+addTA(GSPC.EMA.50 - GSPC.EMA.200,col='blue', type='h', legend = '50-200 EMA')
+
+
+
+chartSeries(IBEX$IBEX.Close, theme = "white",
+            TA="addEMA(n=50, col='black');addEMA(n=200, col='blue')")
+IBEX.EMA.50 <- EMA(IBEX$IBEX.Close, n=50)
+IBEX.EMA.200 <- EMA(IBEX$IBEX.Close, n=200)
+addTA(IBEX.EMA.50 - IBEX.EMA.200,col='blue', type='h', legend = '50-200 EMA')
+
+
+chartSeries(IBEX$IBEX.Close, theme = "white",
+            TA="addEMA(n=50, col='black');addEMA(n=200, col='blue')")
+IBEX.EMA.10 <- EMA(IBEX$IBEX.Close, n=10)
+fast.diff <- IBEX.EMA.10 - IBEX.EMA.50
+slow.diff <- IBEX.EMA.50 - IBEX.EMA.200
+addTA(fast.diff,col='blue', type='h', legend = '10-50 EMA')
+addTA(slow.diff,col='red', type='h', legend = '50-200 EMA')
+
+
+
+chartSeries(GSPC$GSPC.Close, theme = "white",
+            TA="addEMA(n=50, col='black');addEMA(n=200, col='blue')")
+GSPC.EMA.10 <- EMA(GSPC$GSPC.Close, n=10)
+fast.diff <- GSPC.EMA.10 - GSPC.EMA.50
+slow.diff <- GSPC.EMA.50 - GSPC.EMA.200
+addTA(fast.diff,col='blue', type='h', legend = '10-50 EMA')
+addTA(slow.diff,col='red', type='h', legend = '50-200 EMA')
+
+### You can only enter in the direction of the red slow.diff indicator, if its 
+##above 0 you can take long signals, if its below 0, you can take short signals. The fast.diff indicator dictates entries.
+## When the blue line goes from neg to pos, its a long trade ( and the slower red slow.diff indicator is above 0)
+## Same thing for shorts. This is also called moving average crossover trading system.
+### RULES DESRCIBED IN DESCRIPTION.
+## TREND FOLLOWING SYSTEM
+
+### USE PACKAGE binhf. VERY USEFUL for lagging indicators
+install.packages("binhf")
+library(binhf)
+?shift
+## Shift use to shift the vector position
+tail(as.numeric(fast.diff))
+tail(shift(v=as.numeric(fast.diff), places = 1, dir = "right"))
+
+## Long trades
+?ifelse
+long_trades <- ifelse(
+                  slow.diff > 0 &
+                  fast.diff > 0 &
+                  shift(v=as.numeric(fast.diff), places = 1, dir = "right") < 0,
+                  IBEX$IBEX.Close, NA
+                    )
+     
+## Short trades
+short_trades <- ifelse(
+  slow.diff < 0 &
+    fast.diff < 0 &
+    shift(v=as.numeric(fast.diff), places = 1, dir = "right") > 0,
+  IBEX$IBEX.Close, NA
+)
+
+chartSeries(IBEX$IBEX.Close, name = "IBEX Trend Trading", theme = "white", up.col="black")
+plot(IBEX$IBEX.Close)
+points(long_trades, col="blue", cex=1.5, pch=18)
+points(short_trades, col="red", cex=1.5, pch=18)
+
+
+
+
+#### SAME THING FOR GSPC
+
+## Long trades
+?ifelse
+long_GSPC_trades <- ifelse(
+  slow.diff > 0 &
+    fast.diff > 0 &
+    shift(v=as.numeric(fast.diff), places = 1, dir = "right") < 0,
+  GSPC$GSPC.Close, NA
+)
+
+## Short trades
+short_GSPC_trades <- ifelse(
+  slow.diff < 0 &
+    fast.diff < 0 &
+    shift(v=as.numeric(fast.diff), places = 1, dir = "right") > 0,
+  GSPC$GSPC.Close, NA
+)
+
+?plot
+plot(GSPC$GSPC.Close)
+points(long_GSPC_trades, col="blue", cex=1.5, pch=18)
+points(short_GSPC_trades, col="red", cex=1.5, pch=18)
