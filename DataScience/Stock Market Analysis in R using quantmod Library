@@ -203,3 +203,68 @@ short_GSPC_trades <- ifelse(
 plot(GSPC$GSPC.Close)
 points(long_GSPC_trades, col="blue", cex=1.5, pch=18)
 points(short_GSPC_trades, col="red", cex=1.5, pch=18)
+
+
+
+
+############################## TWEAKING THE MODEL ####################################
+### CHANGE fast.diff / slow.diff and try
+IBEX.EMA.20 <- EMA(IBEX$IBEX.Close, n=20)
+IBEX.EMA.100 <- EMA(IBEX$IBEX.Close, n=100)
+IBEX.EMA.300 <- EMA(IBEX$IBEX.Close, n=300)
+
+fast.diff <- IBEX.EMA.20 - IBEX.EMA.100
+slow.diff <- IBEX.EMA.100 - IBEX.EMA.300
+
+## Long trades
+
+long_trades <- ifelse(
+                  slow.diff > shift(v=as.numeric(fast.diff), places = 1, dir = "right")  &
+                  fast.diff > 0 &
+                  shift(v=as.numeric(fast.diff), places = 1, dir = "right") < 0,
+                IBEX$IBEX.Close, NA
+                )
+
+## Short trades
+short_trades <- ifelse(
+                  slow.diff < shift(v=as.numeric(fast.diff), places = 1, dir = "right") &
+                  fast.diff < 0 &
+                  shift(v=as.numeric(fast.diff), places = 1, dir = "right") > 0,
+                IBEX$IBEX.Close, NA
+                )
+
+plot(IBEX$IBEX.Close)
+points(long_trades, col="blue", cex=1.5, pch=18)
+points(short_trades, col="red", cex=1.5, pch=18)
+
+##### REPEATING SAME FOR GSPC 
+GSPC.EMA.300 <- EMA(GSPC$GSPC.Close, n=300)
+
+fast.diff <- GSPC.EMA.20 - GSPC.EMA.100
+slow.diff <- GSPC.EMA.100 - GSPC.EMA.300
+
+## Long trades
+
+long_trades <- ifelse(
+  slow.diff > shift(v=as.numeric(fast.diff), places = 1, dir = "right")  &
+    fast.diff > 0 &
+    shift(v=as.numeric(fast.diff), places = 1, dir = "right") < 0,
+  GSPC$GSPC.Close, NA
+)
+
+## Short trades
+short_trades <- ifelse(
+  slow.diff < shift(v=as.numeric(fast.diff), places = 1, dir = "right") &
+    fast.diff < 0 &
+    shift(v=as.numeric(fast.diff), places = 1, dir = "right") > 0,
+  GSPC$GSPC.Close, NA
+)
+
+plot(GSPC$GSPC.Close)
+points(long_trades, col="blue", cex=1.5, pch=18)
+points(short_trades, col="red", cex=1.5, pch=18)
+########### TWEAK DOESNT WORK HAHAHA ###################################
+#### GO BACK TO OLD MODEL
+#### FUCK ME
+##### OLD CHART WITH A 20-100 fast and 100-300 slow diff WOULD WORK BETTER
+
