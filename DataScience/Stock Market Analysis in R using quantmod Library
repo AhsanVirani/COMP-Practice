@@ -326,3 +326,89 @@ short_trades <- ifelse(
 plot(GSPC$GSPC.Close)
 points(long_trades, col="blue", cex=1, pch=18)
 points(short_trades, col="red", cex=1, pch=18)
+
+
+################## COUNTER TREND SYSTEM - ROC, RSI, CCI, CHAIKIN VOLITILITY
+chartSeries(IBEX, theme="white", TA="addRSI(n=100);addCCI(n=100);addROC(n=100)")
+chartSeries(GSPC, theme="white", TA="addRSI(n=100);addCCI(n=100);addROC(n=100)")
+
+#### A NEW SYSTEM BASED ON CCI
+chartSeries(IBEX, theme="white", TA="addCCI(n=100);addEMA(n=50, col='blue');addEMA(n=200, col='red')")
+slow.diff <- IBEX.EMA.50 - IBEX.EMA.200
+?CCI
+CCI.IND <- CCI(HLC = IBEX[,"IBEX.High",IBEX$IBEX.Low, IBEX$IBEX.Close,
+                          n = 100])
+
+## LONG TRADES
+long_trades <- ifelse(
+                  shift(v=as.numeric(CCI.IND), places = 1, dir = "right") > CCI.IND &
+                  CCI.IND < 100 &
+                  slow.diff > 0, IBEX$IBEX.Close, NA
+                )
+short_trades <- ifelse(
+  shift(v=as.numeric(CCI.IND), places = 1, dir = "right") < CCI.IND &
+    CCI.IND > -100 &
+    slow.diff < 0, IBEX$IBEX.Close, NA
+)
+
+plot(IBEX$IBEX.Close)
+points(long_trades, col="blue", cex=1, pch=18)
+points(short_trades, col="red", cex=1, pch=18)
+
+### WAY OVERTRADING
+# Lets look at volatility
+chartSeries(IBEX, theme="white", TA="addCCI(n=100);addEMA(n=50, col='blue');addEMA(n=200, col='red');addChVol(n=100)")
+
+slow.diff <- IBEX.EMA.50 - IBEX.EMA.200
+?CCI
+CCI.IND <- CCI(HLC = IBEX[,"IBEX.High",IBEX$IBEX.Low, IBEX$IBEX.Close,
+                          n = 100])
+CV.IND <- chaikinVolatility(HL=IBEX[,c("IBEX.High", "IBEX.Low")], n = 100)
+
+## LONG TRADES
+long_trades <- ifelse(
+  shift(v=as.numeric(CCI.IND), places = 1, dir = "right") > CCI.IND &
+    CCI.IND < 100 &
+    CV.IND < 0    &
+    slow.diff > 0, IBEX$IBEX.Close, NA
+)
+short_trades <- ifelse(
+  shift(v=as.numeric(CCI.IND), places = 1, dir = "right") < CCI.IND &
+    CCI.IND > -100 &
+    CV.IND < 0     &
+    slow.diff < 0, IBEX$IBEX.Close, NA
+)
+
+plot(IBEX$IBEX.Close)
+points(long_trades, col="blue", cex=1, pch=18)
+points(short_trades, col="red", cex=1, pch=18)
+
+## Still a mess. Lets try RSI
+chartSeries(IBEX, theme="white", TA="addRSI(n=100);addChVol(n=100)")
+chartSeries(IBEX, theme="white", TA="addRSI(n=30);addChVol(n=100)")
+RSI.fast <- RSI(price = IBEX$IBEX.Close, n =10)
+RSI.slow <- RSI(price = IBEX$IBEX.Close, n =30)
+RSI.diff <- RSI.fast - RSI.slow
+addTA(RSI.diff, col='blue', type='h', legend = "RSI DIFF")
+
+RSI.IND <- RSI(price = IBEX$IBEX.Close, n=30)
+
+## LONG TRADES
+long_trades <- ifelse(
+                  RSI.diff <0 &
+                  shift(v=as.numeric(RSI.diff), places = 1, dir = "right") > RSI.diff &
+                    CCI.IND < 100 &
+                    CV.IND < -0.1    &
+                    slow.diff > 0, IBEX$IBEX.Close, NA
+)
+short_trades <- ifelse(
+                  RSI.diff > 0 &
+                  shift(v=as.numeric(RSI.diff), places = 1, dir = "right") < RSI.diff &
+                    CCI.IND > -100 &
+                    CV.IND < 0     &
+                    slow.diff < 0, IBEX$IBEX.Close, NA
+)
+
+plot(IBEX$IBEX.Close, main = "RSI")
+points(long_trades, col="blue", cex=1, pch=18)
+points(short_trades, col="red", cex=1, pch=18)
