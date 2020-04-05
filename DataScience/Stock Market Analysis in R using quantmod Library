@@ -268,3 +268,61 @@ points(short_trades, col="red", cex=1.5, pch=18)
 #### FUCK ME
 ##### OLD CHART WITH A 20-100 fast and 100-300 slow diff WOULD WORK BETTER
 
+
+########################### INSIGHTS FROM COMMON INDICATORS _ ADX &VWAP
+
+chartSeries(IBEX, theme = "white",
+            TA = "addADX(n=14, maType = 'EMA', wilder=TRUE)", subset = '2013::2015')
+
+
+chartSeries(GSPC, theme = "white",
+            TA = "addADX(n=14, maType = 'EMA', wilder=TRUE)", subset = '2013::2015')
+
+?VWAP
+### Adding indicators to GSPC
+VWAP.slow <- VWAP(price=GSPC$GSPC.Close, volume = GSPC$GSPC.Volume, n=100)
+VWAP.fast <- VWAP(price=GSPC$GSPC.Close, volume = GSPC$GSPC.Volume, n=20)
+VWAP.diff <- VWAP.fast- VWAP.slow
+chartSeries(GSPC, theme = "white", TA = "addVo();addTA(VWAP.slow, on=1, col='red');addTA(VWAP.fast, on=1, col='blue');addTA(VWAP.diff, col='blue')")
+
+## Adding indicators to IBEX
+VWAP.slow <- VWAP(price=IBEX$IBEX.Close, volume = IBEX$IBEX.Volume, n=100)
+VWAP.fast <- VWAP(price=IBEX$IBEX.Close, volume = IBEX$IBEX.Volume, n=20)
+VWAP.diff <- VWAP.fast- VWAP.slow
+chartSeries(IBEX, theme = "white", TA = "addVo();addTA(VWAP.slow, on=1, col='red');addTA(VWAP.fast, on=1, col='blue');addTA(VWAP.diff, col='blue')")
+
+##### NEW TRADING SYSTEM ON ADX
+?ADX
+ADX.20 <- ADX(IBEX, n=14)
+
+# Looking for long entries
+long_trades <- ifelse(
+                  (ADX.20$ADX > 30 & ADX.20$ADX < 45) &
+                  VWAP.diff > 300, IBEX$IBEX.Close, NA
+                )
+
+short_trades <- ifelse(
+                  (ADX.20$ADX > 30 & ADX.20$ADX < 45) &
+                  VWAP.diff < -300, IBEX$IBEX.Close, NA
+                )
+
+plot(IBEX$IBEX.Close)
+points(long_trades, col="blue", cex=1, pch=18)
+points(short_trades, col="red", cex=1, pch=18)
+       
+######## SASME ON GSPC   
+ADX.20 <- ADX(GSPC, n=14)
+
+long_trades <- ifelse(
+  (ADX.20$ADX > 30 & ADX.20$ADX < 45) &
+    VWAP.diff > 50, GSPC$GSPC.Close, NA
+)
+
+short_trades <- ifelse(
+  (ADX.20$ADX > 30 & ADX.20$ADX < 45) &
+    VWAP.diff < -50, GSPC$GSPC.Close, NA
+)
+
+plot(GSPC$GSPC.Close)
+points(long_trades, col="blue", cex=1, pch=18)
+points(short_trades, col="red", cex=1, pch=18)
