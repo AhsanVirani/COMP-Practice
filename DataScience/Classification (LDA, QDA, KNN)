@@ -55,3 +55,90 @@ mean(knn.pred==Direction.2005)
 knn.pred=knn(train.X,test.X,train.Direction,k=3)
 table(knn.pred,Direction.2005)
 mean(knn.pred==Direction.2005)
+
+
+
+################################## QUESTIONS
+## Question 10 Solution
+library(ISLR)
+fix(Weekly)
+dim(Weekly)
+
+summary(Weekly)
+pairs(Weekly)
+?cor
+str(Weekly)
+corrMat <- cor(Weekly[,-9])
+# Year and VOlume seems to have correlation
+
+attach(Weekly)
+?glm
+log.fit <- glm(Direction ~ Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data = Weekly,
+               family = binomial)
+summary(log.fit)
+# Lag 2 is stat sig
+?predict
+log.prob <- predict(log.fit, data = Weekly, type = 'response')
+log.pred <- rep("Down", 1089)
+log.pred[log.prob > 0.5] = "Up"
+table(log.pred, Direction)
+
+train <- (Year<2009)
+tail(train)
+test <- Weekly[!train,]
+log.fit1 <- glm(Direction ~ Lag2, data = Weekly,
+               family = binomial, subset = train)
+log.prob1 <- predict(log.fit1, test, type = 'response')
+log.pred1 <- rep("Down", nrow(test))
+log.pred1[log.prob1 > 0.5] = "Up"
+table(log.pred1, Direction[!train])
+mean(log.pred1 == Direction[!train])
+
+library(MASS)
+### FITTING LDA
+lda.fit <- lda(Direction ~ Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data = Weekly)
+lda.prob <-  predict(lda.fit, Weekly, type = 'response')
+attributes(lda.prob)
+lda.prob$class
+table(lda.prob$class, Direction)
+
+lda.fit <- lda(Direction ~ Lag2, data = Weekly, subset = train)
+lda.prob <-  predict(lda.fit, test, type = 'response')
+attributes(lda.prob)
+lda.prob$class
+table(lda.prob$class, Direction[!train])
+
+## FITTING QDA
+### FITTING LDA
+qda.fit <- qda(Direction ~ Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data = Weekly)
+qda.prob <-  predict(qda.fit, Weekly, type = 'response')
+attributes(qda.prob)
+qda.prob$class
+table(qda.prob$class, Direction)
+
+qda.fit <- qda(Direction ~ Lag2, data = Weekly, subset = train)
+qda.prob <-  predict(qda.fit, test, type = 'response')
+attributes(qda.prob)
+qda.prob$class
+table(qda.prob$class, Direction[!train])
+
+
+### USING KNN 
+Weekly <- na.exclude(Weekly)
+train.rows <- (Year < 2009)
+?knn
+train <- Weekly[train.rows, -c(1,9)]
+test <- Weekly[!train.rows, -c(1,9)]
+train.Dir <- Direction[train.rows]
+library(class)
+knn.pred <- knn(train, test, train.Dir, k = 1)
+table(knn.pred, Direction[!train.rows])
+
+train <-as.data.frame(Weekly$Lag2[train.rows]) 
+test <- as.data.frame(Weekly$Lag2[!train.rows])
+train.Dir <- Direction[train.rows]
+library(class)
+set.seed(1)
+knn.pred <- knn(train, test, train.Dir, k = 1)
+table(knn.pred, Direction[!train.rows])
+mean(knn.pred==Direction[!train.rows])
